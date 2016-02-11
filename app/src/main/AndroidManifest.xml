@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddNewItemActivity" />
+        <activity android:name=".activity.AddNewItemActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.youngbin.mailtracker.MainActivity" />
+        </activity>
 
         <receiver
             android:name=".receiver.BootReceiver"
@@ -28,7 +32,17 @@
         <service
             android:name=".service.DataLoader"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.TrackingDetailsActivity"
+            android:label="@string/title_activity_tracking_details"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.youngbin.mailtracker.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
