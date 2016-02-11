@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">MailTracker</string>
+    <string name="addnew_hint_name">우편물 이름</string>
+    <string name="addnew_hint_num">추적번호</string>
+    <string name="addnew_prompt_carrier">배송업체</string>
+    <string name="addnew_prompt_nat">배송업체 국적</string>
+    <string name="title_activity_tracking_details">추적 정보</string>
+    <string name="action_settings">설정</string>
+
+    <string-array name="carrier_nat">
+        <item>미국</item>
+        <item>한국</item>
+    </string-array>
+
+    <!--US Carriers-->
+    <string-array name="carrier_us">
+        <item>ECMS Express (APEX)</item>
+        <item>UPS</item>
+        <item>i-Parcel</item>
+    </string-array>
+    <!--Korean Carriers-->
+    <string-array name="carrier_ko">
+        <item>우체국 국내우편</item>
+        <item>우체국 국제우편</item>
+        <item>로젠택배</item>
+        <item>CJ 대한통운 국내우편</item>
+    </string-array>
+</resources>

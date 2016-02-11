@@ -34,7 +34,7 @@ public class AddNewItemActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.done) {
-            startActivity(new Intent(mContext, TrackingDetailsActivity.class));
+//            startActivity(new Intent(mContext, TrackingDetailsActivity.class));
             return true;
         }
 
