@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddNewItemActivity">
+        <activity android:name=".activity.AddNewItemActivity"
+            android:label="@string/title_activity_add_new_item">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.youngbin.mailtracker.MainActivity" />
@@ -34,7 +35,12 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.TrackingDetailsActivity"></activity>
+        <activity android:name=".activity.TrackingDetailsActivity"
+            android:label="@string/title_activity_tracking_details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.youngbin.mailtracker.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

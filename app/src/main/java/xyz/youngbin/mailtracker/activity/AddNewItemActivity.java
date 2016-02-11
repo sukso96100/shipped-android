@@ -6,16 +6,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import xyz.youngbin.mailtracker.R;
 
 public class AddNewItemActivity extends AppCompatActivity {
     Context mContext = AddNewItemActivity.this;
+    EditText mEtName;
+    Spinner mSpNat;
+    Spinner mSpCarrier;
+    EditText mEtNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_item);
+
+        mEtName = (EditText)findViewById(R.id.et_name);
+        mSpNat = (Spinner)findViewById(R.id.sp_nat);
+        mSpCarrier = (Spinner)findViewById(R.id.sp_carrier);
+        mEtNum = (EditText)findViewById(R.id.et_num);
     }
 
     @Override
@@ -34,7 +45,7 @@ public class AddNewItemActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.done) {
-//            startActivity(new Intent(mContext, TrackingDetailsActivity.class));
+            startActivity(new Intent(mContext, TrackingDetailsActivity.class));
             return true;
         }
 

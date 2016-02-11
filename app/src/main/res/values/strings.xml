@@ -42,4 +42,6 @@
         <item>logen</item>
         <item>korex_d</item>
     </string-array>
+    <string name="title_activity_add_new_item">Add or edit item</string>
+    <string name="no_item">Touch "+" to add new item.</string>
 </resources>
