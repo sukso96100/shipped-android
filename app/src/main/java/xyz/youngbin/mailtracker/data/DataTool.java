@@ -42,7 +42,15 @@ public class DataTool {
         mRealm.commitTransaction();
     }
 
-    public void syncItem(){}
+    public void syncItem(MailModel PrevData, String Receiver, String Sender, String Url, String[] Status, String[] Time){
+        mRealm.beginTransaction();
+        PrevData.setReceiver(Receiver);
+        PrevData.setSender(Sender);
+        PrevData.setUrl(Url);
+        PrevData.setStatus(Status);
+        PrevData.setTime(Time);
+        mRealm.commitTransaction();
+    }
 
     public MailModel getItem(String Nat, String Carrier, String Number){
         RealmQuery<MailModel> query = mRealm.where(MailModel.class)
