@@ -1,47 +1,45 @@
 <resources>
     <string name="app_name">MailTracker</string>
     <string name="action_settings">Settings</string>
-    <string name="addnew_prompt_nat">Nationality of the carrier</string>
-    <string name="addnew_prompt_carrier">Carrier of the mail</string>
+    <string name="addnew_prompt_carrier">Carrier</string>
     <string name="addnew_hint_num">Tracking number</string>
     <string name="title_activity_tracking_details">Tracking Details</string>
     <string name="addnew_hint_name">Name of the mail</string>
+    <string name="addnew_prompt_type">Type</string>
 
-    <!--Carrier Nationality-->
-    <string-array name="carrier_nat">
-        <item>US</item>
-        <item>Korea</item>
+    <!--Item Type-->
+    <string-array name="type">
+        <item>Mails</item>
     </string-array>
-    <string-array name="carrier_nat_val">
-        <item>us</item>
-        <item>ko</item>
+    <string-array name="type_val">
+        <item>mails</item>
     </string-array>
 
-    <!--US Carriers-->
-    <string-array name="carrier_us">
+    <!--Carriers - Mails-->
+    <string-array name="carriers_mails">
+        <!--US Carriers-->
         <item>ECMS Express (APEX)</item>
         <item>UPS</item>
         <item>i-Parcel</item>
-    </string-array>
-    <string-array name="carrier_us_val">
-        <item>ecms</item>
-        <item>ups</item>
-        <item>iparcel</item>
-    </string-array>
-
-    <!--Korean Carriers-->
-    <string-array name="carrier_ko">
+        <!--Korean Carriers-->
         <item>Korea Post Domestic Mails</item>
         <item>Korea Post International Mails</item>
         <item>Logen Corporation</item>
         <item>CJ Korea Express Domestic Mails</item>
     </string-array>
-    <string-array name="carrier_ko_val">
+    <string-array name="carriers_mails_val">
+        <!--US Carriers-->
+        <item>ecms</item>
+        <item>ups</item>
+        <item>iparcel</item>
+        <!--Korean Carriers-->
         <item>koreapost_d</item>
         <item>koreapost_i</item>
         <item>logen</item>
         <item>korex_d</item>
     </string-array>
+
     <string name="title_activity_add_new_item">Add or edit item</string>
     <string name="no_item">Touch "+" to add new item.</string>
+
 </resources>

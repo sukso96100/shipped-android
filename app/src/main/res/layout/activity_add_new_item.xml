@@ -22,12 +22,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/addnew_prompt_nat"/>
+        android:text="@string/addnew_prompt_type"/>
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sp_nat"
-        android:entries="@array/carrier_nat"
+        android:entries="@array/type"
         android:padding="8dp"/>
     <TextView
         android:layout_width="match_parent"

@@ -26,7 +26,7 @@ public class AddNewItemActivity extends AppCompatActivity {
     EditText mEtNum;
 
     String mName;
-    String mNat;
+    String mType;
     String mCarrier;
     String mNum;
     String[] mCarrierVal;
@@ -59,15 +59,11 @@ public class AddNewItemActivity extends AppCompatActivity {
                 switch (position){
                     default:
                         mSpCarrier.setAdapter(setUpCarriersList(
-                                mContext, R.array.carrier_us, R.array.carrier_us_val, "us"));
+                                mContext, R.array.carriers_mails, R.array.carriers_mails_val, "mails"));
                         break;
                     case 0:
                         mSpCarrier.setAdapter(setUpCarriersList(
-                                mContext, R.array.carrier_us, R.array.carrier_us_val, "us"));
-                        break;
-                    case 1:
-                        mSpCarrier.setAdapter(setUpCarriersList(
-                                mContext, R.array.carrier_ko, R.array.carrier_ko_val, "ko"));
+                                mContext, R.array.carriers_mails, R.array.carriers_mails_val, "mails"));
                         break;
                 }
             }
@@ -102,12 +98,12 @@ public class AddNewItemActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public ArrayAdapter<String> setUpCarriersList(Context c, int array, int valarray, String natcode){
+    public ArrayAdapter<String> setUpCarriersList(Context c, int array, int valarray, String typecode){
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 c, android.R.layout.simple_spinner_dropdown_item,
                 c.getResources().getStringArray(array));
         mCarrierVal = c.getResources().getStringArray(valarray);
-        mNat = natcode;
+        mType = typecode;
         return adapter;
     }
 }
