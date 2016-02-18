@@ -1,4 +1,4 @@
-package xyz.youngbin.mailtracker;
+package xyz.youngbin.shipped;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

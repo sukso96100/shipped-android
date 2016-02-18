@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MailTracker</string>
+    <string name="app_name">Shipped!</string>
     <string name="action_settings">Settings</string>
     <string name="addnew_prompt_carrier">Carrier</string>
     <string name="addnew_hint_num">Tracking number</string>

@@ -1,11 +1,10 @@
-package xyz.youngbin.mailtracker.data;
+package xyz.youngbin.shipped.data;
 
 import android.content.Context;
 import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
-import io.realm.RealmResults;
 
 /**
  * Created by youngbin on 16. 2. 10.
@@ -47,8 +46,8 @@ public class DataTool {
         PrevData.setReceiver(Receiver);
         PrevData.setSender(Sender);
         PrevData.setUrl(Url);
-        PrevData.setStatus(Status);
-        PrevData.setTime(Time);
+        PrevData.setStatusArray(convertArrayToString(Status));
+        PrevData.setTimeArray(convertArrayToString(Time));
         mRealm.commitTransaction();
     }
 
@@ -65,5 +64,24 @@ public class DataTool {
         }else{
             return null;
         }
+    }
+
+    // CONVERTER
+    // http://stackoverflow.com/questions/9053685/android-sqlite-saving-string-array
+    private static String strSeparator = "__,__";
+    private static String convertArrayToString(String[] array){
+        String str = "";
+        for (int i = 0;i<array.length; i++) {
+            str = str+array[i];
+            // Do not append comma at the end of last element
+            if(i<array.length-1){
+                str = str+strSeparator;
+            }
+        }
+        return str;
+    }
+    private static String[] convertStringToArray(String str){
+        String[] arr = str.split(strSeparator);
+        return arr;
     }
 }

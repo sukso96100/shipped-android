@@ -1,4 +1,4 @@
-package xyz.youngbin.mailtracker;
+package xyz.youngbin.shipped;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import xyz.youngbin.mailtracker.activity.AddNewItemActivity;
+import xyz.youngbin.shipped.activity.AddNewItemActivity;
 
 public class MainActivity extends AppCompatActivity {
     Context mContext = MainActivity.this;

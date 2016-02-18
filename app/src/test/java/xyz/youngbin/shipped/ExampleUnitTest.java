@@ -1,4 +1,4 @@
-package xyz.youngbin.mailtracker;
+package xyz.youngbin.shipped;
 
 import org.junit.Test;
 

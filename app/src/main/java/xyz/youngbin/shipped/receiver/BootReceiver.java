@@ -1,4 +1,4 @@
-package xyz.youngbin.mailtracker.receiver;
+package xyz.youngbin.shipped.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

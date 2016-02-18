@@ -1,4 +1,4 @@
-package xyz.youngbin.mailtracker.service;
+package xyz.youngbin.shipped.service;
 
 import android.app.Service;
 import android.content.Intent;

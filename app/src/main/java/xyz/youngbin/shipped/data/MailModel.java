@@ -1,4 +1,4 @@
-package xyz.youngbin.mailtracker.data;
+package xyz.youngbin.shipped.data;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Required;
@@ -8,18 +8,18 @@ import io.realm.annotations.Required;
  */
 public class MailModel extends RealmObject {
 
-    String Name;
-    String Receiver;
-    String Sender;
-    String Url;
+    private String Name;
+    private String Receiver;
+    private String Sender;
+    private String Url;
 
-    String[] Status;
-    String[] Time;
+    private String StatusArray;
+    private String TimeArray;
 
     @Required
-    String Carrier;
-    String Nat;
-    String Number;
+    private String Carrier;
+    private String Nat;
+    private String Number;
 
     //Setters
 
@@ -39,12 +39,12 @@ public class MailModel extends RealmObject {
         Url = url;
     }
 
-    public void setStatus(String[] status) {
-        Status = status;
+    public void setStatusArray(String statusArray) {
+        StatusArray = statusArray;
     }
 
-    public void setTime(String[] time) {
-        Time = time;
+    public void setTimeArray(String timeArray) {
+        TimeArray = timeArray;
     }
 
     public void setCarrier(String carrier) {
@@ -77,12 +77,12 @@ public class MailModel extends RealmObject {
         return Url;
     }
 
-    public String[] getStatus() {
-        return Status;
+    public String getStatusArray() {
+        return StatusArray;
     }
 
-    public String[] getTime() {
-        return Time;
+    public String getTimeArray() {
+        return TimeArray;
     }
 
     public String getCarrier() {
@@ -96,4 +96,5 @@ public class MailModel extends RealmObject {
     public String getNumber() {
         return Number;
     }
+
 }

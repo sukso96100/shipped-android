@@ -1,9 +1,9 @@
-package xyz.youngbin.mailtracker.activity;
+package xyz.youngbin.shipped.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import xyz.youngbin.mailtracker.R;
+import xyz.youngbin.shipped.R;
 
 public class TrackingDetailsActivity extends AppCompatActivity {
 
