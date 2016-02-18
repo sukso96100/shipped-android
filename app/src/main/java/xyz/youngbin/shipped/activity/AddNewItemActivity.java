@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import xyz.youngbin.shipped.R;
 
 public class AddNewItemActivity extends AppCompatActivity {
+
     Context mContext = AddNewItemActivity.this;
     EditText mEtName;
     Spinner mSpType;
@@ -26,7 +28,9 @@ public class AddNewItemActivity extends AppCompatActivity {
     String mType;
     String mCarrier;
     String mNum;
-    String[] mCarrierVal;
+    String mCarrierVal;
+
+    String TAG = mContext.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class AddNewItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SelectCarrierActivity.class);
                 intent.putExtra("type",mType);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent,7);
             }
         });
         mSpType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -69,8 +73,13 @@ public class AddNewItemActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
-
-        
+        Log.d(TAG, "onActivityResult");
+        if(requestCode==7 && resultCode==RESULT_OK){
+            Log.d(TAG, "onActivityResult : RESULT_OK");
+            mBtnCarrier.setText(intent.getStringExtra("carrier"));
+            mCarrier = intent.getStringExtra("carrier");
+            mCarrierVal = intent.getStringExtra("carrierval");
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
