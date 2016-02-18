@@ -46,9 +46,6 @@
         <activity
             android:name=".activity.SelectCarrierActivity"
             android:label="@string/title_activity_select_carrier">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="xyz.youngbin.shipped.activity.AddNewItemActivity" />
         </activity>
     </application>
 
