@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -17,8 +18,8 @@ import xyz.youngbin.shipped.R;
 public class AddNewItemActivity extends AppCompatActivity {
     Context mContext = AddNewItemActivity.this;
     EditText mEtName;
-    Spinner mSpNat;
-    Spinner mSpCarrier;
+    Spinner mSpType;
+    Button mBtnCarrier;
     EditText mEtNum;
 
     String mName;
@@ -33,33 +34,27 @@ public class AddNewItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_item);
 
         mEtName = (EditText)findViewById(R.id.et_name);
-        mSpNat = (Spinner)findViewById(R.id.sp_nat);
-        mSpCarrier = (Spinner)findViewById(R.id.sp_carrier);
+        mSpType = (Spinner)findViewById(R.id.sp_type);
+        mBtnCarrier = (Button)findViewById(R.id.btn_carrier);
         mEtNum = (EditText)findViewById(R.id.et_num);
 
-//        mEtName.setOnEditorActionListener();
-        mSpCarrier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mBtnCarrier.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mCarrier = mCarrierVal[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, SelectCarrierActivity.class);
+                intent.putExtra("type",mType);
+                startActivityForResult(intent,0);
             }
         });
-        mSpNat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mSpType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     default:
-                        mSpCarrier.setAdapter(setUpCarriersList(
-                                mContext, R.array.carriers_mails, R.array.carriers_mails_val, "mails"));
+                        mType = "mails";
                         break;
                     case 0:
-                        mSpCarrier.setAdapter(setUpCarriersList(
-                                mContext, R.array.carriers_mails, R.array.carriers_mails_val, "mails"));
+                        mType = "mails";
                         break;
                 }
             }
@@ -71,6 +66,12 @@ public class AddNewItemActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -94,12 +95,5 @@ public class AddNewItemActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public ArrayAdapter<String> setUpCarriersList(Context c, int array, int valarray, String typecode){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                c, android.R.layout.simple_spinner_dropdown_item,
-                c.getResources().getStringArray(array));
-        mCarrierVal = c.getResources().getStringArray(valarray);
-        mType = typecode;
-        return adapter;
-    }
+
 }

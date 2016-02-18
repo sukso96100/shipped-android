@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="xyz.youngbin.shipped.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="xyz.youngbin.shipped.activity.AddNewItemActivity"
+        <activity
+            android:name=".activity.AddNewItemActivity"
             android:label="@string/title_activity_add_new_item">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -26,20 +27,28 @@
         </activity>
 
         <receiver
-            android:name="xyz.youngbin.shipped.receiver.BootReceiver"
+            android:name=".receiver.BootReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <service
-            android:name="xyz.youngbin.shipped.service.DataLoader"
+            android:name=".service.DataLoader"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="xyz.youngbin.shipped.activity.TrackingDetailsActivity"
+        <activity
+            android:name=".activity.TrackingDetailsActivity"
             android:label="@string/title_activity_tracking_details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.youngbin.shipped.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SelectCarrierActivity"
+            android:label="@string/title_activity_select_carrier">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="xyz.youngbin.shipped.activity.AddNewItemActivity" />
         </activity>
     </application>
 

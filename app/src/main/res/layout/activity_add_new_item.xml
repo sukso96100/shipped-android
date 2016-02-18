@@ -24,19 +24,19 @@
         android:layout_height="wrap_content"
         android:text="@string/addnew_prompt_type"/>
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sp_nat"
+        android:id="@+id/sp_type"
         android:entries="@array/type"
         android:padding="8dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/addnew_prompt_carrier"/>
-    <Spinner
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sp_carrier"
+        android:id="@+id/btn_carrier"
         android:padding="8dp"/>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

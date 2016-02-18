@@ -27,5 +27,6 @@
     </string-array>
     <string name="title_activity_add_new_item">항목 추가 또는 수정</string>
     <string name="no_item">"+" 를 눌러 항목을 추가하세요.</string>
+    <string name="title_activity_select_carrier">업체 선택</string>
 
 </resources>
