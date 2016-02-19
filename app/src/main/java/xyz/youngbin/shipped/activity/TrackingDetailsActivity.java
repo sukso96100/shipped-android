@@ -4,16 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import xyz.youngbin.shipped.R;
 import xyz.youngbin.shipped.data.DataModel;
 import xyz.youngbin.shipped.data.DataTool;
+import xyz.youngbin.shipped.data.DetailsAdapter;
 import xyz.youngbin.shipped.data.Util;
 
 public class TrackingDetailsActivity extends AppCompatActivity {
@@ -22,9 +26,9 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     DataTool mDataTool;
 
     String mType;
-    String mCarrier ;
+    String mCarrier;
     String mCarrierVal;
-    String mNum ;
+    String mNum;
 
     String[] mStatus;
     String[] mTime;
@@ -36,7 +40,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracking_details);
+        setContentView(R.layout.activity_listview_only);
 
         mListView = (ListView)findViewById(R.id.listView);
 
@@ -48,6 +52,8 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         mNum = getIntent().getStringExtra("num");
 
         mData = mDataTool.getItem(mType, mCarrierVal, mNum);
+
+        setupListView();
     }
 
     @Override
@@ -62,6 +68,8 @@ public class TrackingDetailsActivity extends AppCompatActivity {
             mNum = intent.getStringExtra("num");
 
             mData = mDataTool.getItem(mType, mCarrierVal, mNum);
+
+            setupListView();
         }
     }
 
@@ -82,10 +90,12 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         switch (id){
             case R.id.action_edit:
                 Intent editIntent = new Intent(mContext, AddNewItemActivity.class);
+                editIntent.putExtra("name", mData.getName());
                 editIntent.putExtra("type", mType);
                 editIntent.putExtra("carrier", mCarrier);
                 editIntent.putExtra("carrierval", mCarrierVal);
                 editIntent.putExtra("num", mNum);
+                editIntent.putExtra("isprevdata", true);
                 startActivityForResult(editIntent, 7);
                 break;
 
@@ -96,15 +106,41 @@ public class TrackingDetailsActivity extends AppCompatActivity {
 
     void setupListView(){
         LayoutInflater mLayoutInflaer = (LayoutInflater)mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        LinearLayout mHeader;
+        View mHeader;
+
         switch (mType){
-            case "mail":
-                mHeader = (LinearLayout)mLayoutInflaer.inflate(R.layout.header_mails, null);
+            case "mails":
+                mHeader = mLayoutInflaer.inflate(R.layout.header_mails, null);
+                TextView txtCarrier = (TextView)mHeader.findViewById(R.id.carrier);
+                TextView txtNum = (TextView)mHeader.findViewById(R.id.num);
+                TextView txtSender = (TextView)mHeader.findViewById(R.id.sender);
+                TextView txtReceiver = (TextView)mHeader.findViewById(R.id.receiver);
+
+                txtCarrier.setText(mCarrier);
+                txtNum.setText(mNum);
+                try {
+                    txtSender.setText(mData.getSender());
+                    txtReceiver.setText(mData.getReceiver());
+                }catch (Exception e){}
+                mListView.addHeaderView(mHeader);
                 break;
         }
 
-        mStatus = Util.convertStringToArray(mData.getStatusArray());
-        mTime = Util.convertStringToArray(mData.getTimeArray());
+        try{
+            mStatus = Util.convertStringToArray(mData.getStatusArray());
+            mTime = Util.convertStringToArray(mData.getTimeArray());
+        }catch (Exception e){
+            mStatus = new String[0];
+            mTime = new String[0];
+        }
 
+        DetailsAdapter adapter = new DetailsAdapter(mStatus, mTime, mContext);
+        mListView.setAdapter(adapter);
+        try{
+            getSupportActionBar().setTitle(mData.getName());
+        }catch (Exception e){
+            e.printStackTrace();
+            getSupportActionBar().setTitle(mNum);
+        }
     }
 }

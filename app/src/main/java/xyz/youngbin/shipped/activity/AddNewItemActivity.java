@@ -53,10 +53,25 @@ public class AddNewItemActivity extends AppCompatActivity {
         mIsPrevData = getIntent().getBooleanExtra("isprevdata", false);
         mDataTool = new DataTool(mContext);
         if(mIsPrevData){
-            String Type = getIntent().getStringExtra("type");
-            String Carrier = getIntent().getStringExtra("carrier");
-            String Number = getIntent().getStringExtra("number");
-            mPrevData = mDataTool.getItem(Type, Carrier, Number);
+            mName = getIntent().getStringExtra("name");
+            mType = getIntent().getStringExtra("type");
+            mCarrier = getIntent().getStringExtra("carrier");
+            mCarrierVal = getIntent().getStringExtra("carrierval");
+            mNum = getIntent().getStringExtra("num");
+            mPrevData = mDataTool.getItem(mType, mCarrierVal, mNum);
+
+            mEtName.setText(mName);
+            mBtnCarrier.setText(mCarrier);
+            mEtNum.setText(mNum);
+
+            switch (mType){
+                default:
+                    mSpType.setSelection(0);
+                    break;
+                case "mails":
+                    mSpType.setSelection(0);
+                    break;
+            }
         }
 
         mBtnCarrier.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +133,7 @@ public class AddNewItemActivity extends AppCompatActivity {
             mNum = mEtNum.getText().toString();
 
             if(mPrevData==null){
+                Log.d(TAG,"Adding New Data");
                 mDataTool.addNewItem(mName, mType, mCarrierVal, mNum);
                 Intent detailsIntent = new Intent(mContext, TrackingDetailsActivity.class);
                 detailsIntent.putExtra("type", mType);
@@ -125,7 +141,9 @@ public class AddNewItemActivity extends AppCompatActivity {
                 detailsIntent.putExtra("carrierval", mCarrierVal);
                 detailsIntent.putExtra("num", mNum);
                 startActivity(detailsIntent);
+                finish();
             }else {
+                Log.d(TAG,"Editing Existing Data");
                 mDataTool.saveItem(mPrevData, mName,mType, mCarrier, mNum);
                 Intent intent = new Intent();
                 intent.putExtra("type", mType);

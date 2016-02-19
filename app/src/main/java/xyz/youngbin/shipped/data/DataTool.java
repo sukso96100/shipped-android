@@ -20,7 +20,10 @@ public class DataTool {
     }
 
     public void addNewItem(String Name, String Type, String CarrierVal, String Number){
-        if(getItem(Type, CarrierVal, Number)==null){
+        Log.d(TAG, "addNewItem");
+        DataModel mItem = getItem(Type, CarrierVal, Number);
+        if(mItem==null){
+            Log.d(TAG, "Adding New Item...");
             mRealm.beginTransaction();
             DataModel MM = mRealm.createObject(DataModel.class);
             MM.setName(Name);
@@ -28,11 +31,14 @@ public class DataTool {
             MM.setCarrierVal(CarrierVal);
             MM.setNumber(Number);
             mRealm.commitTransaction();
+        }else{
+            saveItem(mItem, Name, Type, CarrierVal, Number);
         }
 
     }
 
     public void saveItem(DataModel PrevData, String Name, String Type, String CarrierVal, String Number){
+        Log.d(TAG, "saveItem");
         mRealm.beginTransaction();
         PrevData.setName(Name);
         PrevData.setType(Type);
@@ -42,6 +48,7 @@ public class DataTool {
     }
 
     public void syncItem(DataModel PrevData, String Receiver, String Sender, String Url, String Status, String Time){
+        Log.d(TAG, "syncItem");
         mRealm.beginTransaction();
         PrevData.setReceiver(Receiver);
         PrevData.setSender(Sender);
@@ -52,6 +59,7 @@ public class DataTool {
     }
 
     public DataModel getItem(String Type, String CarrierVal, String Number){
+        Log.d(TAG, "getItem");
         RealmQuery<DataModel> query = mRealm.where(DataModel.class)
                 .equalTo("Type",Type)
                 .equalTo("CarrierVal",CarrierVal)

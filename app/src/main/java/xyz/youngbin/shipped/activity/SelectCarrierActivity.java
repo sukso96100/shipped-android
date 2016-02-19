@@ -10,8 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 import xyz.youngbin.shipped.R;
 
 public class SelectCarrierActivity extends AppCompatActivity {
@@ -25,7 +23,7 @@ public class SelectCarrierActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_carrier);
+        setContentView(R.layout.activity_listview_only);
 
         mListView = (ListView)findViewById(R.id.listView);
 

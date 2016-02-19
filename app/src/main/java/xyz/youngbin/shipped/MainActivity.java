@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView)findViewById(R.id.listView);
 
-//        mListView.setEmptyView(getEmptyView(mContext,
-//                mContext.getResources().getString(R.string.no_item)));
+        mListView.setEmptyView(getEmptyView(mContext,
+                mContext.getResources().getString(R.string.no_item)));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     public View getEmptyView(Context c, String info){
         LayoutInflater LI = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout EmptyView = (LinearLayout)LI.inflate(R.layout.emptyview, null);
+        View EmptyView = LI.inflate(R.layout.emptyview, null);
         TextView InfoTxt = (TextView)EmptyView.findViewById(R.id.info);
         InfoTxt.setText(info);
 
