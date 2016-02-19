@@ -40,7 +40,7 @@
     </string-array>
 
     <string name="title_activity_add_new_item">Add or edit item</string>
-    <string name="no_item">Touch "+" to add new item.</string>
+    <string name="no_item">Touch (+) to add new item.</string>
     <string name="title_activity_select_carrier">Select Carrier</string>
     <string name="btn_click_to_select">(Click here to select)</string>
     <string name="sender">Sender</string>

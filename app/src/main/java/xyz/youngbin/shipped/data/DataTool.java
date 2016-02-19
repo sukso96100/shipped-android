@@ -41,13 +41,13 @@ public class DataTool {
         mRealm.commitTransaction();
     }
 
-    public void syncItem(DataModel PrevData, String Receiver, String Sender, String Url, String[] Status, String[] Time){
+    public void syncItem(DataModel PrevData, String Receiver, String Sender, String Url, String Status, String Time){
         mRealm.beginTransaction();
         PrevData.setReceiver(Receiver);
         PrevData.setSender(Sender);
         PrevData.setUrl(Url);
-        PrevData.setStatusArray(convertArrayToString(Status));
-        PrevData.setTimeArray(convertArrayToString(Time));
+        PrevData.setStatusArray(Status);
+        PrevData.setTimeArray(Time);
         mRealm.commitTransaction();
     }
 

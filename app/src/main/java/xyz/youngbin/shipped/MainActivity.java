@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView)findViewById(R.id.listView);
 
-        mListView.setEmptyView(getEmptyView(mContext,
-                mContext.getResources().getString(R.string.no_item)));
+//        mListView.setEmptyView(getEmptyView(mContext,
+//                mContext.getResources().getString(R.string.no_item)));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
