@@ -19,24 +19,24 @@ public class DataTool {
         Log.d(TAG, "Got Realm Instance");
     }
 
-    public void addNewItem(String Name, String Type, String Carrier, String Number){
-        if(getItem(Type, Carrier, Number)==null){
+    public void addNewItem(String Name, String Type, String CarrierVal, String Number){
+        if(getItem(Type, CarrierVal, Number)==null){
             mRealm.beginTransaction();
             DataModel MM = mRealm.createObject(DataModel.class);
             MM.setName(Name);
             MM.setType(Type);
-            MM.setCarrier(Carrier);
+            MM.setCarrierVal(CarrierVal);
             MM.setNumber(Number);
             mRealm.commitTransaction();
         }
 
     }
 
-    public void saveItem(DataModel PrevData, String Name, String Type, String Carrier, String Number){
+    public void saveItem(DataModel PrevData, String Name, String Type, String CarrierVal, String Number){
         mRealm.beginTransaction();
         PrevData.setName(Name);
         PrevData.setType(Type);
-        PrevData.setCarrier(Carrier);
+        PrevData.setCarrierVal(CarrierVal);
         PrevData.setNumber(Number);
         mRealm.commitTransaction();
     }
@@ -51,10 +51,10 @@ public class DataTool {
         mRealm.commitTransaction();
     }
 
-    public DataModel getItem(String Type, String Carrier, String Number){
+    public DataModel getItem(String Type, String CarrierVal, String Number){
         RealmQuery<DataModel> query = mRealm.where(DataModel.class)
                 .equalTo("Type",Type)
-                .equalTo("Carrier",Carrier)
+                .equalTo("CarrierVal",CarrierVal)
                 .equalTo("Number",Number);
 
         DataModel result = query.findFirst();
@@ -66,22 +66,5 @@ public class DataTool {
         }
     }
 
-    // CONVERTER
-    // http://stackoverflow.com/questions/9053685/android-sqlite-saving-string-array
-    private static String strSeparator = "__,__";
-    private static String convertArrayToString(String[] array){
-        String str = "";
-        for (int i = 0;i<array.length; i++) {
-            str = str+array[i];
-            // Do not append comma at the end of last element
-            if(i<array.length-1){
-                str = str+strSeparator;
-            }
-        }
-        return str;
-    }
-    private static String[] convertStringToArray(String str){
-        String[] arr = str.split(strSeparator);
-        return arr;
-    }
+
 }

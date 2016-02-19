@@ -19,7 +19,7 @@ public class DataModel extends RealmObject {
     private String TimeArray;
 
     @Required
-    private String Carrier;
+    private String CarrierVal;
     private String Type;
     private String Number;
 
@@ -49,8 +49,8 @@ public class DataModel extends RealmObject {
         TimeArray = timeArray;
     }
 
-    public void setCarrier(String carrier) {
-        Carrier = carrier;
+    public void setCarrierVal(String carrierVal) {
+        CarrierVal = carrierVal;
     }
 
     public void setType(String type) {
@@ -95,8 +95,8 @@ public class DataModel extends RealmObject {
         return TimeArray;
     }
 
-    public String getCarrier() {
-        return Carrier;
+    public String getCarrierVal() {
+        return CarrierVal;
     }
 
     public String getType() {

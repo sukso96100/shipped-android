@@ -118,12 +118,25 @@ public class AddNewItemActivity extends AppCompatActivity {
             mNum = mEtNum.getText().toString();
 
             if(mPrevData==null){
-                mDataTool.addNewItem(mName, mType, mCarrier, mNum);
+                mDataTool.addNewItem(mName, mType, mCarrierVal, mNum);
+                Intent detailsIntent = new Intent(mContext, TrackingDetailsActivity.class);
+                detailsIntent.putExtra("type", mType);
+                detailsIntent.putExtra("carrier", mCarrier);
+                detailsIntent.putExtra("carrierval", mCarrierVal);
+                detailsIntent.putExtra("num", mNum);
+                startActivity(detailsIntent);
             }else {
                 mDataTool.saveItem(mPrevData, mName,mType, mCarrier, mNum);
+                Intent intent = new Intent();
+                intent.putExtra("type", mType);
+                intent.putExtra("carrier", mCarrier);
+                intent.putExtra("carrierval", mCarrierVal);
+                intent.putExtra("num", mNum);
+                setResult(RESULT_OK,intent);
+                finish();
             }
 
-            startActivity(new Intent(mContext, TrackingDetailsActivity.class));
+
             return true;
         }
 
