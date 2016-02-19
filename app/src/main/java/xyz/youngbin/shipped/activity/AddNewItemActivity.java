@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import xyz.youngbin.shipped.R;
+import xyz.youngbin.shipped.data.DataModel;
+import xyz.youngbin.shipped.data.DataTool;
+import xyz.youngbin.shipped.receiver.BootReceiver;
 
 public class AddNewItemActivity extends AppCompatActivity {
 
@@ -30,6 +33,10 @@ public class AddNewItemActivity extends AppCompatActivity {
     String mNum;
     String mCarrierVal;
 
+    DataTool mDataTool;
+    DataModel mPrevData;
+    Boolean mIsPrevData;
+
     String TAG = mContext.getClass().getSimpleName();
 
     @Override
@@ -37,10 +44,20 @@ public class AddNewItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_item);
 
+        //Setup Views
         mEtName = (EditText)findViewById(R.id.et_name);
         mSpType = (Spinner)findViewById(R.id.sp_type);
         mBtnCarrier = (Button)findViewById(R.id.btn_carrier);
         mEtNum = (EditText)findViewById(R.id.et_num);
+
+        mIsPrevData = getIntent().getBooleanExtra("isprevdata", false);
+        mDataTool = new DataTool(mContext);
+        if(mIsPrevData){
+            String Type = getIntent().getStringExtra("type");
+            String Carrier = getIntent().getStringExtra("carrier");
+            String Number = getIntent().getStringExtra("number");
+            mPrevData = mDataTool.getItem(Type, Carrier, Number);
+        }
 
         mBtnCarrier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +82,7 @@ public class AddNewItemActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                // Just do nothing.
             }
         });
     }
@@ -97,6 +114,15 @@ public class AddNewItemActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.done) {
+            mName = mEtName.getText().toString();
+            mNum = mEtNum.getText().toString();
+
+            if(mPrevData==null){
+                mDataTool.addNewItem(mName, mType, mCarrier, mNum);
+            }else {
+                mDataTool.saveItem(mPrevData, mName,mType, mCarrier, mNum);
+            }
+
             startActivity(new Intent(mContext, TrackingDetailsActivity.class));
             return true;
         }

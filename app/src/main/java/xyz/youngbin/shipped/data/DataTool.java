@@ -19,12 +19,12 @@ public class DataTool {
         Log.d(TAG, "Got Realm Instance");
     }
 
-    public void addNewItem(String Name, String Nat, String Carrier, String Number){
-        if(getItem(Nat, Carrier, Number)==null){
+    public void addNewItem(String Name, String Type, String Carrier, String Number){
+        if(getItem(Type, Carrier, Number)==null){
             mRealm.beginTransaction();
-            MailModel MM = mRealm.createObject(MailModel.class);
+            DataModel MM = mRealm.createObject(DataModel.class);
             MM.setName(Name);
-            MM.setNat(Nat);
+            MM.setType(Type);
             MM.setCarrier(Carrier);
             MM.setNumber(Number);
             mRealm.commitTransaction();
@@ -32,16 +32,16 @@ public class DataTool {
 
     }
 
-    public void saveItem(MailModel PrevData, String Name, String Nat, String Carrier, String Number){
+    public void saveItem(DataModel PrevData, String Name, String Type, String Carrier, String Number){
         mRealm.beginTransaction();
         PrevData.setName(Name);
-        PrevData.setNat(Nat);
+        PrevData.setType(Type);
         PrevData.setCarrier(Carrier);
         PrevData.setNumber(Number);
         mRealm.commitTransaction();
     }
 
-    public void syncItem(MailModel PrevData, String Receiver, String Sender, String Url, String[] Status, String[] Time){
+    public void syncItem(DataModel PrevData, String Receiver, String Sender, String Url, String[] Status, String[] Time){
         mRealm.beginTransaction();
         PrevData.setReceiver(Receiver);
         PrevData.setSender(Sender);
@@ -51,13 +51,13 @@ public class DataTool {
         mRealm.commitTransaction();
     }
 
-    public MailModel getItem(String Nat, String Carrier, String Number){
-        RealmQuery<MailModel> query = mRealm.where(MailModel.class)
-                .equalTo("Nat",Nat)
+    public DataModel getItem(String Type, String Carrier, String Number){
+        RealmQuery<DataModel> query = mRealm.where(DataModel.class)
+                .equalTo("Type",Type)
                 .equalTo("Carrier",Carrier)
                 .equalTo("Number",Number);
 
-        MailModel result = query.findFirst();
+        DataModel result = query.findFirst();
 
         if(result!=null){
             return result;

@@ -5,37 +5,6 @@
     android:layout_height="match_parent"
     tools:context="xyz.youngbin.shipped.activity.TrackingDetailsActivity"
     android:orientation="vertical">
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="?attr/colorPrimary"
-       android:orientation="vertical"
-       android:padding="16dp">
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="CARRIER"
-           android:textColor="@android:color/white"
-           android:id="@+id/carrier"/>
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="TRACKING NUMBER"
-           android:textColor="@android:color/white"
-           android:id="@+id/num"/>
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="SENDER"
-           android:textColor="@android:color/white"
-           android:id="@+id/sender"/>
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="RECEIVER"
-           android:textColor="@android:color/white"
-           android:id="@+id/receiver"/>
-   </LinearLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

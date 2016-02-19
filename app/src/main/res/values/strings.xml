@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Shipped!</string>
     <string name="action_settings">Settings</string>
-    <string name="addnew_prompt_carrier">Carrier</string>
-    <string name="addnew_hint_num">Tracking number</string>
+    <string name="carrier">Carrier</string>
+    <string name="tracking_num">Tracking number</string>
     <string name="title_activity_tracking_details">Tracking Details</string>
-    <string name="addnew_hint_name">Name of the mail</string>
-    <string name="addnew_prompt_type">Type</string>
+    <string name="item_name">Name of the item</string>
+    <string name="type">Type</string>
 
     <!--Item Type-->
     <string-array name="type">
@@ -43,5 +43,10 @@
     <string name="no_item">Touch "+" to add new item.</string>
     <string name="title_activity_select_carrier">Select Carrier</string>
     <string name="btn_click_to_select">(Click here to select)</string>
+    <string name="sender">Sender</string>
+    <string name="receiver">Receiver</string>
+    <string name="share">Share</string>
+    <string name="edit">Edit</string>
+    <string name="open_web">Open in web browser</string>
 
 </resources>

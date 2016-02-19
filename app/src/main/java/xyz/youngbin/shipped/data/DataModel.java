@@ -6,11 +6,13 @@ import io.realm.annotations.Required;
 /**
  * Created by youngbin on 16. 2. 11.
  */
-public class MailModel extends RealmObject {
+public class DataModel extends RealmObject {
 
     private String Name;
     private String Receiver;
     private String Sender;
+    private String Origin;
+    private String Destination;
     private String Url;
 
     private String StatusArray;
@@ -18,7 +20,7 @@ public class MailModel extends RealmObject {
 
     @Required
     private String Carrier;
-    private String Nat;
+    private String Type;
     private String Number;
 
     //Setters
@@ -51,12 +53,20 @@ public class MailModel extends RealmObject {
         Carrier = carrier;
     }
 
-    public void setNat(String nat) {
-        Nat = nat;
+    public void setType(String type) {
+        Type = type;
     }
 
     public void setNumber(String number) {
         Number = number;
+    }
+
+    public String getOrigin() {
+        return Origin;
+    }
+
+    public String getDestination() {
+        return Destination;
     }
 
     //Getters
@@ -89,12 +99,19 @@ public class MailModel extends RealmObject {
         return Carrier;
     }
 
-    public String getNat() {
-        return Nat;
+    public String getType() {
+        return Type;
     }
 
     public String getNumber() {
         return Number;
     }
 
+    public void setOrigin(String origin) {
+        Origin = origin;
+    }
+
+    public void setDestination(String destination) {
+        Destination = destination;
+    }
 }
