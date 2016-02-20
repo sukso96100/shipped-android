@@ -107,7 +107,7 @@ public class DataModel extends RealmObject {
     public String getNumber() {
         return Number;
     }
-    
+
     public String getOrigin() {
         return Origin;
     }
