@@ -53,6 +53,7 @@ public class AddNewItemActivity extends AppCompatActivity {
         mIsPrevData = getIntent().getBooleanExtra("isprevdata", false);
         mDataTool = new DataTool(mContext);
         if(mIsPrevData){
+            Log.d(TAG, "Loading Previous Data to Edit");
             mName = getIntent().getStringExtra("name");
             mType = getIntent().getStringExtra("type");
             mCarrier = getIntent().getStringExtra("carrier");
@@ -144,7 +145,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                 finish();
             }else {
                 Log.d(TAG,"Editing Existing Data");
-                mDataTool.saveItem(mPrevData, mName,mType, mCarrier, mNum);
+                mDataTool.saveItem(mPrevData, mName, mType, mCarrierVal, mNum);
                 Intent intent = new Intent();
                 intent.putExtra("type", mType);
                 intent.putExtra("carrier", mCarrier);

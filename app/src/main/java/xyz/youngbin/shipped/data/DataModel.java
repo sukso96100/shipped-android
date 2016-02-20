@@ -26,48 +26,49 @@ public class DataModel extends RealmObject {
     //Setters
 
     public void setName(String name) {
-        Name = name;
+        this.Name = name;
     }
 
     public void setReceiver(String receiver) {
-        Receiver = receiver;
+        this.Receiver = receiver;
     }
 
     public void setSender(String sender) {
-        Sender = sender;
+        this.Sender = sender;
     }
 
     public void setUrl(String url) {
-        Url = url;
+        this.Url = url;
     }
 
     public void setStatusArray(String statusArray) {
-        StatusArray = statusArray;
+        this.StatusArray = statusArray;
     }
 
     public void setTimeArray(String timeArray) {
-        TimeArray = timeArray;
+        this.TimeArray = timeArray;
     }
 
     public void setCarrierVal(String carrierVal) {
-        CarrierVal = carrierVal;
+        this.CarrierVal = carrierVal;
     }
 
     public void setType(String type) {
-        Type = type;
+        this.Type = type;
     }
 
     public void setNumber(String number) {
-        Number = number;
+        this.Number = number;
     }
 
-    public String getOrigin() {
-        return Origin;
+    public void setOrigin(String origin) {
+        this.Origin = origin;
     }
 
-    public String getDestination() {
-        return Destination;
+    public void setDestination(String destination) {
+        this.Destination = destination;
     }
+
 
     //Getters
 
@@ -106,12 +107,14 @@ public class DataModel extends RealmObject {
     public String getNumber() {
         return Number;
     }
-
-    public void setOrigin(String origin) {
-        Origin = origin;
+    
+    public String getOrigin() {
+        return Origin;
     }
 
-    public void setDestination(String destination) {
-        Destination = destination;
+    public String getDestination() {
+        return Destination;
     }
+
+
 }

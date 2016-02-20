@@ -31,8 +31,10 @@ public class DataTool {
             MM.setCarrierVal(CarrierVal);
             MM.setNumber(Number);
             mRealm.commitTransaction();
+            Log.d(TAG, "addNewItem : Added new one");
         }else{
             saveItem(mItem, Name, Type, CarrierVal, Number);
+            Log.d(TAG, "addNewItem : saved");
         }
 
     }
@@ -45,6 +47,7 @@ public class DataTool {
         PrevData.setCarrierVal(CarrierVal);
         PrevData.setNumber(Number);
         mRealm.commitTransaction();
+        Log.d(TAG, "saveitem : saved");
     }
 
     public void syncItem(DataModel PrevData, String Receiver, String Sender, String Url, String Status, String Time){
@@ -68,8 +71,10 @@ public class DataTool {
         DataModel result = query.findFirst();
 
         if(result!=null){
+            Log.d(TAG, "getItem : returning result");
             return result;
         }else{
+            Log.d(TAG, "getItem : null");
             return null;
         }
     }

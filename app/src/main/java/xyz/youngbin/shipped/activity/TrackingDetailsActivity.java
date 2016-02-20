@@ -34,6 +34,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     String[] mTime;
 
     ListView mListView;
+    View mHeader;
 
     String TAG = mContext.getClass().getSimpleName();
 
@@ -69,6 +70,8 @@ public class TrackingDetailsActivity extends AppCompatActivity {
 
             mData = mDataTool.getItem(mType, mCarrierVal, mNum);
 
+            mListView.removeHeaderView(mHeader);
+
             setupListView();
         }
     }
@@ -90,7 +93,9 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         switch (id){
             case R.id.action_edit:
                 Intent editIntent = new Intent(mContext, AddNewItemActivity.class);
-                editIntent.putExtra("name", mData.getName());
+                try{
+                    editIntent.putExtra("name", mData.getName());
+                }catch (Exception e){}
                 editIntent.putExtra("type", mType);
                 editIntent.putExtra("carrier", mCarrier);
                 editIntent.putExtra("carrierval", mCarrierVal);
@@ -106,7 +111,6 @@ public class TrackingDetailsActivity extends AppCompatActivity {
 
     void setupListView(){
         LayoutInflater mLayoutInflaer = (LayoutInflater)mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View mHeader;
 
         switch (mType){
             case "mails":
