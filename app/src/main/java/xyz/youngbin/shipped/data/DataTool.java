@@ -87,5 +87,11 @@ public class DataTool {
         return results;
     }
 
+    public void removeItem(String TypeVal, String CarrierVal, String Number){
+        DataModel toRemove = getItem(TypeVal, CarrierVal, Number);
+        mRealm.beginTransaction();
+        toRemove.removeFromRealm();
+        mRealm.commitTransaction();
+    }
 
 }

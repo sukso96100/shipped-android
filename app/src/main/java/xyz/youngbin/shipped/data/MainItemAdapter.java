@@ -2,6 +2,7 @@ package xyz.youngbin.shipped.data;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,16 +24,20 @@ public class MainItemAdapter extends BaseAdapter {
     String[] mNum;
     String[] mCarrier;
     String[] mStatus;
+    Boolean[] mSelection;
 
-    public MainItemAdapter(Context context, String[] TypeVal,
-                           String[] Type, String[] Name, String[] Num, String[] Carrier, String[] Status){
+    public MainItemAdapter(Context context, String[] TypeVal,String[] Type,
+                           String[] Name, String[] Num, String[] Carrier,
+                           String[] Status, Boolean[] Selection){
+
+        mContext = context;
         mTypeVal = TypeVal;
         mType = Type;
         mName = Name;
         mNum = Num;
         mCarrier = Carrier;
         mStatus = Status;
-        mContext = context;
+        mSelection = Selection;
     }
 
     @Override
@@ -56,6 +61,7 @@ public class MainItemAdapter extends BaseAdapter {
         TextView txtName;
         TextView txtCarrier;
         TextView txtStatus;
+        View ItemBg;
     }
 
     @Override
@@ -73,6 +79,7 @@ public class MainItemAdapter extends BaseAdapter {
             holder.txtName = (TextView)convertView.findViewById(R.id.name);
             holder.txtCarrier = (TextView)convertView.findViewById(R.id.carrier);
             holder.txtStatus = (TextView)convertView.findViewById(R.id.status);
+            holder.ItemBg = convertView.findViewById(R.id.itembg);
 
             convertView.setTag(holder);
         }else{
@@ -97,6 +104,18 @@ public class MainItemAdapter extends BaseAdapter {
         holder.txtCarrier.setText(mCarrier[position]);
         holder.txtStatus.setText(mStatus[position]);
 
+        //Set Selection Background Color
+        if(mSelection[position]==null||!mSelection[position]){
+            holder.ItemBg.setBackgroundColor(Color.WHITE);
+        }else{
+            holder.ItemBg.setBackgroundColor(Color.LTGRAY);
+        }
+
         return convertView;
+    }
+
+    public void updateSelection(Boolean[] Selection){
+        mSelection = Selection;
+        notifyDataSetChanged();
     }
 }
