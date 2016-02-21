@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +25,8 @@ public class MainActivity extends AppCompatActivity
 implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
     Context mContext = MainActivity.this;
     ListView mListView;
+    View mEmptyView;
+    TextView mInfo;
     DataTool mDataTool;
 
     String[] mTypeVal;
@@ -44,6 +45,10 @@ implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
         setSupportActionBar(toolbar);
 
         mListView = (ListView)findViewById(R.id.listView);
+        mEmptyView = findViewById(R.id.empty);
+        mInfo = (TextView)findViewById(R.id.info);
+
+        mInfo.setText(mContext.getResources().getString(R.string.no_item));
 
         mDataTool = new DataTool(mContext);
 
@@ -80,15 +85,6 @@ implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
         return super.onOptionsItemSelected(item);
     }
 
-    public View getEmptyView(Context c, String info){
-        LayoutInflater LI = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View EmptyView = LI.inflate(R.layout.emptyview, null);
-        TextView InfoTxt = (TextView)EmptyView.findViewById(R.id.info);
-        InfoTxt.setText(info);
-
-        return EmptyView;
-    }
-
     public void setupListView(){
         RealmResults<DataModel> results = mDataTool.getAllItems();
 
@@ -121,16 +117,21 @@ implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
             MainItemAdapter adapter = new MainItemAdapter(mContext, mTypeVal, mType, mName, mNum, mCarrier, mStatus);
             mListView.setAdapter(adapter);
 
-            mListView.setEmptyView(getEmptyView(mContext,
-                    mContext.getResources().getString(R.string.no_item)));
+            mListView.setEmptyView(mEmptyView);
+
+            mListView.setOnItemClickListener(this);
         }
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent detailIntent = new Intent(mContext, TrackingDetailsActivity.class);
-        detailIntent.putExtra("type", mTypeVal);
+        Intent detailsIntent = new Intent(mContext, TrackingDetailsActivity.class);
+        detailsIntent.putExtra("typeval", mTypeVal[position]);
+        detailsIntent.putExtra("carrier", mCarrier[position]);
+        detailsIntent.putExtra("carrierval", mCarrierVal[position]);
+        detailsIntent.putExtra("num", mNum[position]);
+        startActivity(detailsIntent);
     }
 
     @Override

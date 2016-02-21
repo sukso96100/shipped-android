@@ -70,8 +70,6 @@ public class TrackingDetailsActivity extends AppCompatActivity {
 
             mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 
-            mListView.removeHeaderView(mHeader);
-
             setupListView();
         }
     }
@@ -110,7 +108,22 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     }
 
     void setupListView(){
+
+        try{mListView.removeHeaderView(mHeader);}catch (Exception e){}
+
         LayoutInflater mLayoutInflaer = (LayoutInflater)mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        try{
+            mStatus = Util.convertStringToArray(mData.getStatusArray());
+            mTime = Util.convertStringToArray(mData.getTimeArray());
+        }catch (Exception e){
+            mStatus = new String[0];
+            mTime = new String[0];
+        }
+
+        DetailsAdapter adapter = new DetailsAdapter(mStatus, mTime, mContext);
+        mListView.setAdapter(adapter);
+
 
         switch (mTypeVal){
             case "mail":
@@ -129,24 +142,26 @@ public class TrackingDetailsActivity extends AppCompatActivity {
                 }
                 txtCarrier.setText(mCarrier);
                 txtNum.setText(mNum);
-                try {
-                    txtSender.setText(mData.getSender());
-                    txtReceiver.setText(mData.getReceiver());
-                }catch (Exception e){}
-                mListView.addHeaderView(mHeader);
+                if(mData.getSender()==null||mData.getSender().equals("")){
+                    txtSender.setText(" : "+mContext.getResources().getString(R.string.unknown));
+                    }else{
+                    txtSender.setText(" : "+mData.getSender());
+                    }
+                if(mData.getReceiver()==null||mData.getReceiver().equals("")){
+                    txtReceiver.setText(" : "+mContext.getResources().getString(R.string.unknown));
+                    }else{
+                    txtReceiver.setText(" : "+mData.getReceiver());
+                    }
+
                 break;
         }
-
-        try{
-            mStatus = Util.convertStringToArray(mData.getStatusArray());
-            mTime = Util.convertStringToArray(mData.getTimeArray());
-        }catch (Exception e){
-            mStatus = new String[0];
-            mTime = new String[0];
+        if(mStatus.length==0){
+            Log.d(TAG, "Adding EmptyView");
+            TextView mInfo = (TextView)mHeader.findViewById(R.id.info);
+            mInfo.setText(mContext.getResources().getString(R.string.no_info));
+        }else{
+            mHeader.findViewById(R.id.empty).setVisibility(View.GONE);
         }
-
-        DetailsAdapter adapter = new DetailsAdapter(mStatus, mTime, mContext);
-        mListView.setAdapter(adapter);
-
+        mListView.addHeaderView(mHeader);
     }
 }

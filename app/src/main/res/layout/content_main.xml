@@ -14,4 +14,7 @@
       android:id="@+id/listView"
       android:divider="@null"
       android:dividerHeight="0dp"/>
+    <include
+        android:id="@+id/empty"
+        layout="@layout/emptyview"/>
 </RelativeLayout>

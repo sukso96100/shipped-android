@@ -36,5 +36,7 @@
     <string name="share">공유</string>
     <string name="no_status">아직 상태를 알 수 없습니다.</string>
     <string name="mail">우편</string>
+    <string name="unknown">(알 수 없음)</string>
+    <string name="no_info">이용 가능한 정보가 없습니다.</string>
 
 </resources>

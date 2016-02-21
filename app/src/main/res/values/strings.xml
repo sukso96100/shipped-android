@@ -50,5 +50,7 @@
     <string name="open_web">Open in web browser</string>
     <string name="no_status">Status is not available yet.</string>
     <string name="mail">Mail</string>
+    <string name="unknown">(unknown)</string>
+    <string name="no_info">No informations available.</string>
 
 </resources>
