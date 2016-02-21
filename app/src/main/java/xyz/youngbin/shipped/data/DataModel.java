@@ -20,7 +20,7 @@ public class DataModel extends RealmObject {
 
     @Required
     private String CarrierVal;
-    private String Type;
+    private String TypeVal;
     private String Number;
 
     //Setters
@@ -53,8 +53,8 @@ public class DataModel extends RealmObject {
         this.CarrierVal = carrierVal;
     }
 
-    public void setType(String type) {
-        this.Type = type;
+    public void setTypeVal(String typeVal) {
+        this.TypeVal = typeVal;
     }
 
     public void setNumber(String number) {
@@ -100,8 +100,8 @@ public class DataModel extends RealmObject {
         return CarrierVal;
     }
 
-    public String getType() {
-        return Type;
+    public String getTypeVal() {
+        return TypeVal;
     }
 
     public String getNumber() {

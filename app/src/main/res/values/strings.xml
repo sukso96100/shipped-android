@@ -9,10 +9,10 @@
 
     <!--Item Type-->
     <string-array name="type">
-        <item>Mails</item>
+        <item>Mail</item>
     </string-array>
     <string-array name="type_val">
-        <item>mails</item>
+        <item>mail</item>
     </string-array>
 
     <!--Carriers - Mails-->
@@ -48,5 +48,7 @@
     <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string name="open_web">Open in web browser</string>
+    <string name="no_status">Status is not available yet.</string>
+    <string name="mail">Mail</string>
 
 </resources>

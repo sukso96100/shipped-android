@@ -25,7 +25,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     DataModel mData;
     DataTool mDataTool;
 
-    String mType;
+    String mTypeVal;
     String mCarrier;
     String mCarrierVal;
     String mNum;
@@ -47,12 +47,12 @@ public class TrackingDetailsActivity extends AppCompatActivity {
 
         mDataTool = new DataTool(mContext);
 
-        mType = getIntent().getStringExtra("type");
+        mTypeVal = getIntent().getStringExtra("typeval");
         mCarrier = getIntent().getStringExtra("carrier");
         mCarrierVal = getIntent().getStringExtra("carrierval");
         mNum = getIntent().getStringExtra("num");
 
-        mData = mDataTool.getItem(mType, mCarrierVal, mNum);
+        mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 
         setupListView();
     }
@@ -63,12 +63,12 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         Log.d(TAG, "onActivityResult");
         if(requestCode==7 && resultCode==RESULT_OK){
             Log.d(TAG, "onActivityResult : RESULT_OK");
-            mType = intent.getStringExtra("type");
+            mTypeVal = intent.getStringExtra("typeval");
             mCarrier = intent.getStringExtra("carrier");
             mCarrierVal = intent.getStringExtra("carrierval");
             mNum = intent.getStringExtra("num");
 
-            mData = mDataTool.getItem(mType, mCarrierVal, mNum);
+            mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 
             mListView.removeHeaderView(mHeader);
 
@@ -96,7 +96,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
                 try{
                     editIntent.putExtra("name", mData.getName());
                 }catch (Exception e){}
-                editIntent.putExtra("type", mType);
+                editIntent.putExtra("typeval", mTypeVal);
                 editIntent.putExtra("carrier", mCarrier);
                 editIntent.putExtra("carrierval", mCarrierVal);
                 editIntent.putExtra("num", mNum);
@@ -112,14 +112,21 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     void setupListView(){
         LayoutInflater mLayoutInflaer = (LayoutInflater)mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        switch (mType){
-            case "mails":
+        switch (mTypeVal){
+            case "mail":
                 mHeader = mLayoutInflaer.inflate(R.layout.header_mails, null);
+                TextView txtName = (TextView)mHeader.findViewById(R.id.name);
                 TextView txtCarrier = (TextView)mHeader.findViewById(R.id.carrier);
                 TextView txtNum = (TextView)mHeader.findViewById(R.id.num);
                 TextView txtSender = (TextView)mHeader.findViewById(R.id.sender);
                 TextView txtReceiver = (TextView)mHeader.findViewById(R.id.receiver);
 
+                try{
+                    txtName.setText(mData.getName());
+                }catch (Exception e){
+                    e.printStackTrace();
+                    txtName.setText(mNum);
+                }
                 txtCarrier.setText(mCarrier);
                 txtNum.setText(mNum);
                 try {
@@ -140,11 +147,6 @@ public class TrackingDetailsActivity extends AppCompatActivity {
 
         DetailsAdapter adapter = new DetailsAdapter(mStatus, mTime, mContext);
         mListView.setAdapter(adapter);
-        try{
-            getSupportActionBar().setTitle(mData.getName());
-        }catch (Exception e){
-            e.printStackTrace();
-            getSupportActionBar().setTitle(mNum);
-        }
+
     }
 }

@@ -14,10 +14,10 @@ import xyz.youngbin.shipped.R;
 
 public class SelectCarrierActivity extends AppCompatActivity {
     Context mContext = SelectCarrierActivity.this;
-    String mType;
+    String mTypeVal;
     ListView mListView;
-    String[] mCarriers;
-    String[] mCarriersVals;
+    String[] mCarrierArray;
+    String[] mCarriersValArray;
     
 
     @Override
@@ -27,9 +27,9 @@ public class SelectCarrierActivity extends AppCompatActivity {
 
         mListView = (ListView)findViewById(R.id.listView);
 
-        mType = getIntent().getStringExtra("type");
+        mTypeVal = getIntent().getStringExtra("typeval");
 
-        switch (mType){
+        switch (mTypeVal){
             default:
                 setUpListView(R.array.carriers_mails, R.array.carriers_mails_val);
                 break;
@@ -40,21 +40,21 @@ public class SelectCarrierActivity extends AppCompatActivity {
     }
 
     void setUpListView(int Carriers, int CarriersVals){
-        mCarriers = mContext.getResources().getStringArray(Carriers);
-        mCarriersVals = mContext.getResources().getStringArray(CarriersVals);
+        mCarrierArray = mContext.getResources().getStringArray(Carriers);
+        mCarriersValArray = mContext.getResources().getStringArray(CarriersVals);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-                android.R.layout.simple_spinner_dropdown_item, mCarriers);
+                android.R.layout.simple_spinner_dropdown_item, mCarrierArray);
 
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("CARRIER",mCarriers[position]);
-                Log.d("CARRIERVAL",mCarriersVals[position]);
+                Log.d("CARRIER",mCarrierArray[position]);
+                Log.d("CARRIERVAL",mCarriersValArray[position]);
                 Intent intent = new Intent();
-                intent.putExtra("carrier",mCarriers[position]);
-                intent.putExtra("carrierval",mCarriersVals[position]);
+                intent.putExtra("carrier",mCarrierArray[position]);
+                intent.putExtra("carrierval",mCarriersValArray[position]);
 
                 setResult(RESULT_OK,intent);
                 finish();

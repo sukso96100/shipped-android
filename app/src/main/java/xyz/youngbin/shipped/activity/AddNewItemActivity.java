@@ -28,7 +28,8 @@ public class AddNewItemActivity extends AppCompatActivity {
     EditText mEtNum;
 
     String mName;
-    String mType;
+    String mTypeVal;
+    String[] mTypeValArray;
     String mCarrier;
     String mNum;
     String mCarrierVal;
@@ -44,6 +45,8 @@ public class AddNewItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_item);
 
+        mTypeValArray = mContext.getResources().getStringArray(R.array.type_val);
+
         //Setup Views
         mEtName = (EditText)findViewById(R.id.et_name);
         mSpType = (Spinner)findViewById(R.id.sp_type);
@@ -55,21 +58,21 @@ public class AddNewItemActivity extends AppCompatActivity {
         if(mIsPrevData){
             Log.d(TAG, "Loading Previous Data to Edit");
             mName = getIntent().getStringExtra("name");
-            mType = getIntent().getStringExtra("type");
+            mTypeVal = getIntent().getStringExtra("typeval");
             mCarrier = getIntent().getStringExtra("carrier");
             mCarrierVal = getIntent().getStringExtra("carrierval");
             mNum = getIntent().getStringExtra("num");
-            mPrevData = mDataTool.getItem(mType, mCarrierVal, mNum);
+            mPrevData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 
             mEtName.setText(mName);
             mBtnCarrier.setText(mCarrier);
             mEtNum.setText(mNum);
 
-            switch (mType){
+            switch (mTypeVal){
                 default:
                     mSpType.setSelection(0);
                     break;
-                case "mails":
+                case "mail":
                     mSpType.setSelection(0);
                     break;
             }
@@ -79,21 +82,14 @@ public class AddNewItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SelectCarrierActivity.class);
-                intent.putExtra("type",mType);
+                intent.putExtra("typeval",mTypeVal);
                 startActivityForResult(intent,7);
             }
         });
         mSpType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    default:
-                        mType = "mails";
-                        break;
-                    case 0:
-                        mType = "mails";
-                        break;
-                }
+                mTypeVal = mTypeValArray[position];
             }
 
             @Override
@@ -135,9 +131,9 @@ public class AddNewItemActivity extends AppCompatActivity {
 
             if(mPrevData==null){
                 Log.d(TAG,"Adding New Data");
-                mDataTool.addNewItem(mName, mType, mCarrierVal, mNum);
+                mDataTool.addNewItem(mName, mTypeVal, mCarrierVal, mNum);
                 Intent detailsIntent = new Intent(mContext, TrackingDetailsActivity.class);
-                detailsIntent.putExtra("type", mType);
+                detailsIntent.putExtra("typeval", mTypeVal);
                 detailsIntent.putExtra("carrier", mCarrier);
                 detailsIntent.putExtra("carrierval", mCarrierVal);
                 detailsIntent.putExtra("num", mNum);
@@ -145,9 +141,9 @@ public class AddNewItemActivity extends AppCompatActivity {
                 finish();
             }else {
                 Log.d(TAG,"Editing Existing Data");
-                mDataTool.saveItem(mPrevData, mName, mType, mCarrierVal, mNum);
+                mDataTool.saveItem(mPrevData, mName, mTypeVal, mCarrierVal, mNum);
                 Intent intent = new Intent();
-                intent.putExtra("type", mType);
+                intent.putExtra("typeval", mTypeVal);
                 intent.putExtra("carrier", mCarrier);
                 intent.putExtra("carrierval", mCarrierVal);
                 intent.putExtra("num", mNum);
