@@ -3,6 +3,7 @@ package xyz.youngbin.shipped.data;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.annotation.BoolRes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,54 +12,26 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import io.realm.RealmBaseAdapter;
+import io.realm.RealmResults;
 import xyz.youngbin.shipped.R;
 
 /**
  * Created by youngbin on 16. 2. 21.
  */
-public class MainItemAdapter extends BaseAdapter {
+public class MainItemAdapter extends RealmBaseAdapter<DataModel> {
 
     String TAG = this.getClass().getSimpleName();
+    ArrayList<String> mSelection;
 
-    Context mContext;
-    String[] mTypeVal;
-    String[] mType;
-    String[] mName;
-    String[] mNum;
-    String[] mCarrier;
-    String[] mStatus;
-    Boolean[] mSelection;
-
-    public MainItemAdapter(Context context, String[] TypeVal,String[] Type,
-                           String[] Name, String[] Num, String[] Carrier,
-                           String[] Status, Boolean[] Selection){
-
-        mContext = context;
-        mTypeVal = TypeVal;
-        mType = Type;
-        mName = Name;
-        mNum = Num;
-        mCarrier = Carrier;
-        mStatus = Status;
-        mSelection = Selection;
+    public MainItemAdapter(Context context, RealmResults<DataModel> realmResults, boolean automaticUpdate, ArrayList<String> Selection) {
+        super(context, realmResults, automaticUpdate);
+        this.mSelection = Selection;
     }
 
-    @Override
-    public int getCount() {
-        return mTypeVal.length;
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    private class ViewHolder {
+    private static class ViewHolder {
         ImageView imgIcon;
         TextView txtType;
         TextView txtName;
@@ -71,7 +44,7 @@ public class MainItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         LayoutInflater mLayoutInflater =
-                (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null){
             convertView = mLayoutInflater.inflate(R.layout.item_main, null);
@@ -90,17 +63,17 @@ public class MainItemAdapter extends BaseAdapter {
         }
 
         //Set Icon
-        if(mTypeVal[position]!=null) {
-            switch (mTypeVal[position]) {
+        if(realmResults.get(position).getTypeVal()!=null) {
+            switch (realmResults.get(position).getTypeVal()) {
                 default:
                     break;
                 case "mail":
                     holder.imgIcon.setImageDrawable(
-                            mContext.getResources().getDrawable(R.drawable.ic_type_mail));
+                            context.getResources().getDrawable(R.drawable.ic_type_mail));
                     break;
                 case "aircargo":
                     holder.imgIcon.setImageDrawable(
-                            mContext.getResources().getDrawable(R.drawable.ic_type_aircargo));
+                            context.getResources().getDrawable(R.drawable.ic_type_aircargo));
                     break;
             }
         }else {
@@ -108,22 +81,29 @@ public class MainItemAdapter extends BaseAdapter {
         }
 
         //Set Text
-        holder.txtType.setText(mType[position]);
-        holder.txtName.setText(mName[position]);
-        holder.txtCarrier.setText(mCarrier[position]);
-        holder.txtStatus.setText(mStatus[position]);
+        holder.txtType.setText(Util.typeValToTypeString(context, realmResults.get(position).getTypeVal()));
+        holder.txtName.setText(realmResults.get(position).getName());
+        holder.txtCarrier.setText(Util.carrierValtoCarrierString(context,
+                realmResults.get(position).getTypeVal(), realmResults.get(position).getCarrierVal()));
+
+        String statusSummary = Util.getFirstItemOfArrayString(realmResults.get(position).getStatusArray());
+        if(statusSummary==null||statusSummary.equals("")){
+            holder.txtStatus.setText(context.getResources().getString(R.string.no_status));
+        }else {
+            holder.txtStatus.setText(statusSummary);
+        }
 
         //Set Selection Background Color
-        if(mSelection[position]==null||!mSelection[position]){
-            holder.ItemBg.setBackgroundColor(Color.WHITE);
-        }else{
+        if(mSelection.contains(String.valueOf(position))){
             holder.ItemBg.setBackgroundColor(Color.LTGRAY);
+        }else {
+            holder.ItemBg.setBackgroundColor(Color.WHITE);
         }
 
         return convertView;
     }
 
-    public void updateSelection(Boolean[] Selection){
+    public void updateSelection(ArrayList<String> Selection){
         mSelection = Selection;
         notifyDataSetChanged();
     }

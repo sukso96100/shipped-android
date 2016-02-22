@@ -9,6 +9,7 @@ import xyz.youngbin.shipped.R;
  */
 public class Util {
     public Util(){}
+
     // CONVERTER
     // http://stackoverflow.com/questions/9053685/android-sqlite-saving-string-array
     private static String strSeparator = "__,__";
@@ -63,5 +64,15 @@ public class Util {
             }
         }
         return mCarrier[index];
+    }
+
+    public static String getFirstItemOfArrayString(String ArrayString){
+        try {
+            String[] convertedArray = Util.convertStringToArray(ArrayString);
+            return convertedArray[0];
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
