@@ -3,6 +3,7 @@ package xyz.youngbin.shipped.data;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import xyz.youngbin.shipped.R;
  * Created by youngbin on 16. 2. 21.
  */
 public class MainItemAdapter extends BaseAdapter {
+
+    String TAG = this.getClass().getSimpleName();
 
     Context mContext;
     String[] mTypeVal;
@@ -87,15 +90,21 @@ public class MainItemAdapter extends BaseAdapter {
         }
 
         //Set Icon
-        switch (mTypeVal[position]){
-            case "mail":
-                holder.imgIcon.setImageDrawable(
-                        mContext.getResources().getDrawable(R.drawable.ic_type_mail));
-                break;
-            case "aircargo":
-                holder.imgIcon.setImageDrawable(
-                        mContext.getResources().getDrawable(R.drawable.ic_type_aircargo));
-                break;
+        if(mTypeVal[position]!=null) {
+            switch (mTypeVal[position]) {
+                default:
+                    break;
+                case "mail":
+                    holder.imgIcon.setImageDrawable(
+                            mContext.getResources().getDrawable(R.drawable.ic_type_mail));
+                    break;
+                case "aircargo":
+                    holder.imgIcon.setImageDrawable(
+                            mContext.getResources().getDrawable(R.drawable.ic_type_aircargo));
+                    break;
+            }
+        }else {
+            Log.d(TAG, "mTypeVal for pos "+position+" is null");
         }
 
         //Set Text

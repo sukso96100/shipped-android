@@ -137,6 +137,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                 detailsIntent.putExtra("carrier", mCarrier);
                 detailsIntent.putExtra("carrierval", mCarrierVal);
                 detailsIntent.putExtra("num", mNum);
+                mDataTool.closeRealm();
                 startActivity(detailsIntent);
                 finish();
             }else {
@@ -148,6 +149,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                 intent.putExtra("carrierval", mCarrierVal);
                 intent.putExtra("num", mNum);
                 setResult(RESULT_OK,intent);
+                mDataTool.closeRealm();
                 finish();
             }
 
@@ -157,6 +159,5 @@ public class AddNewItemActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }

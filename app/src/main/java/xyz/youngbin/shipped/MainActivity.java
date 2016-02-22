@@ -68,6 +68,13 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+
+        setupListView();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -167,11 +174,14 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
         if(item.getItemId()==R.id.delete){
             for(int i=0; i<mSelection.length; i++){
-                if(mSelection[i]){
+                if(mSelection[i]==null||!mSelection[i]){
+
+                }else {
                     mDataTool.removeItem(mTypeVal[i], mCarrierVal[i], mNum[i]);
                 }
             }
             mode.finish();
+            setupListView();
         }
         return false;
     }
@@ -180,5 +190,12 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     public void onDestroyActionMode(android.view.ActionMode mode) {
         mSelection = new Boolean[mTypeVal.length];
         mAdapter.updateSelection(mSelection);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+
+        mDataTool.closeRealm();
     }
 }

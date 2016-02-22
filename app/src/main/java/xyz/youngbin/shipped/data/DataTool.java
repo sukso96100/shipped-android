@@ -22,6 +22,7 @@ public class DataTool {
 
     public void addNewItem(String Name, String TypeVal, String CarrierVal, String Number){
         Log.d(TAG, "addNewItem");
+        Log.d(TAG, "name:"+Name+", typeval:"+TypeVal+", carrierval:"+CarrierVal+", num:"+Number);
         DataModel mItem = getItem(TypeVal, CarrierVal, Number);
         if(mItem==null){
             Log.d(TAG, "Adding New Item...");
@@ -42,6 +43,7 @@ public class DataTool {
 
     public void saveItem(DataModel PrevData, String Name, String TypeVal, String CarrierVal, String Number){
         Log.d(TAG, "saveItem");
+        Log.d(TAG, "name:"+Name+", typeval:"+TypeVal+", carrierval:"+CarrierVal+", num:"+Number);
         mRealm.beginTransaction();
         PrevData.setName(Name);
         PrevData.setTypeVal(TypeVal);
@@ -64,6 +66,7 @@ public class DataTool {
 
     public DataModel getItem(String TypeVal, String CarrierVal, String Number){
         Log.d(TAG, "getItem");
+        Log.d(TAG, "typeval:"+TypeVal+", carrierval:"+CarrierVal+", num:"+Number);
         RealmQuery<DataModel> query = mRealm.where(DataModel.class)
                 .equalTo("TypeVal",TypeVal)
                 .equalTo("CarrierVal",CarrierVal)
@@ -82,16 +85,21 @@ public class DataTool {
 
     public RealmResults<DataModel> getAllItems(){
         Log.d(TAG, "getAllItems");
-        RealmQuery<DataModel> query = mRealm.where(DataModel.class);
-        RealmResults<DataModel> results = query.findAll();
-        return results;
+        return mRealm.where(DataModel.class).findAll();
     }
 
     public void removeItem(String TypeVal, String CarrierVal, String Number){
+        Log.d(TAG, "Removing...");
+        Log.d(TAG, "typeval:"+TypeVal+", carrierval:"+CarrierVal+", num:"+Number);
         DataModel toRemove = getItem(TypeVal, CarrierVal, Number);
         mRealm.beginTransaction();
         toRemove.removeFromRealm();
         mRealm.commitTransaction();
     }
+
+     public void closeRealm(){
+         mRealm.close();
+         Log.d(TAG, "Closed Realm Instance");
+     }
 
 }
