@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -112,7 +113,7 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
         detailsIntent.putExtra("num", mData.get(position).getNumber());
         startActivity(detailsIntent);
     }
-    
+
     @Override
     public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
         if(checked){
@@ -120,7 +121,9 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
         }else {
             mSelection.remove(String.valueOf(position));
         }
-
+        Log.d("Main items Selected", mSelection.toString());
+        mAdapter.updateSelection(mSelection);
+        mode.setTitle(String.valueOf(mSelection.size()));
     }
 
     @Override
