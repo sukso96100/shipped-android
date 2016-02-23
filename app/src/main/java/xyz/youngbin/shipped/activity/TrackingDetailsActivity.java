@@ -2,6 +2,7 @@ package xyz.youngbin.shipped.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,7 @@ import xyz.youngbin.shipped.data.DetailsAdapter;
 import xyz.youngbin.shipped.data.Util;
 import xyz.youngbin.shipped.net.ShippedServer;
 
-public class TrackingDetailsActivity extends AppCompatActivity {
+public class TrackingDetailsActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     Context mContext = TrackingDetailsActivity.this;
     DataModel mData;
@@ -33,6 +34,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
     String[] mStatus;
     String[] mTime;
 
+    SwipeRefreshLayout mSRL;
     ListView mListView;
     View mHeader;
 
@@ -44,6 +46,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listview_only);
 
         mListView = (ListView)findViewById(R.id.listView);
+        mSRL = (SwipeRefreshLayout)findViewById(R.id.root);
 
         mDataTool = new DataTool(mContext);
 
@@ -52,11 +55,8 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         mCarrierVal = getIntent().getStringExtra("carrierval");
         mNum = getIntent().getStringExtra("num");
 
-        ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum);
-
-        mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
-
-        setupListView();
+        mSRL.setOnRefreshListener(this);
+        updateData();
     }
 
     @Override
@@ -70,11 +70,7 @@ public class TrackingDetailsActivity extends AppCompatActivity {
             mCarrierVal = intent.getStringExtra("carrierval");
             mNum = intent.getStringExtra("num");
 
-            ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum);
-
-            mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
-
-            setupListView();
+            updateData();
         }
     }
 
@@ -167,5 +163,26 @@ public class TrackingDetailsActivity extends AppCompatActivity {
             mHeader.findViewById(R.id.empty).setVisibility(View.GONE);
         }
         mListView.addHeaderView(mHeader);
+    }
+
+    void updateData(){
+        Log.d(TAG, "Getting Data from server");
+        ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum, new ShippedServer.ShippedServerCallback() {
+            @Override
+            public void onFinished() {
+                Log.d(TAG, "Getting Data from DB");
+                mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
+
+                Log.d(TAG, "Displaying Data from DB");
+                setupListView();
+                mSRL.setRefreshing(false);
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        mSRL.setRefreshing(true);
+        updateData();
     }
 }
