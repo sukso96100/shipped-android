@@ -53,8 +53,10 @@ public class DataTool {
         Log.d(TAG, "saveitem : saved");
     }
 
-    public void syncItem(DataModel PrevData, String Receiver, String Sender, String Url, String Status, String Time){
+    public void syncItem(String TypeVal, String CarrierVal, String Number,
+                         String Receiver, String Sender, String Url, String Status, String Time){
         Log.d(TAG, "syncItem");
+        DataModel PrevData = getItem(TypeVal, CarrierVal, Number);
         mRealm.beginTransaction();
         PrevData.setReceiver(Receiver);
         PrevData.setSender(Sender);

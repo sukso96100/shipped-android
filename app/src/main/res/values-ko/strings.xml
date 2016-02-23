@@ -39,5 +39,7 @@
     <string name="unknown">(알 수 없음)</string>
     <string name="no_info">이용 가능한 정보가 없습니다.</string>
     <string name="delete">제거</string>
+    <string name="i18n_ups">ko_kr</string>
+    <string name="i18n_ecms">ko</string>
 
 </resources>

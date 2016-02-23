@@ -53,5 +53,7 @@
     <string name="unknown">(unknown)</string>
     <string name="no_info">No informations available.</string>
     <string name="delete">Delete</string>
+    <string name="i18n_ups">en_us</string>
+    <string name="i18n_ecms">en</string>
 
 </resources>
