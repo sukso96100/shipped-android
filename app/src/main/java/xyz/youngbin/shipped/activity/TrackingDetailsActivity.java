@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,8 +17,10 @@ import xyz.youngbin.shipped.data.DataModel;
 import xyz.youngbin.shipped.data.DataTool;
 import xyz.youngbin.shipped.data.DetailsAdapter;
 import xyz.youngbin.shipped.data.Util;
+import xyz.youngbin.shipped.net.ShippedServer;
 
 public class TrackingDetailsActivity extends AppCompatActivity {
+
     Context mContext = TrackingDetailsActivity.this;
     DataModel mData;
     DataTool mDataTool;
@@ -52,6 +52,8 @@ public class TrackingDetailsActivity extends AppCompatActivity {
         mCarrierVal = getIntent().getStringExtra("carrierval");
         mNum = getIntent().getStringExtra("num");
 
+        ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum);
+
         mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 
         setupListView();
@@ -67,6 +69,8 @@ public class TrackingDetailsActivity extends AppCompatActivity {
             mCarrier = intent.getStringExtra("carrier");
             mCarrierVal = intent.getStringExtra("carrierval");
             mNum = intent.getStringExtra("num");
+
+            ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum);
 
             mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 

@@ -56,6 +56,14 @@ public class DataTool {
     public void syncItem(String TypeVal, String CarrierVal, String Number,
                          String Receiver, String Sender, String Url, String Status, String Time){
         Log.d(TAG, "syncItem");
+        Log.d(TAG, TypeVal);
+        Log.d(TAG, CarrierVal);
+        Log.d(TAG, Number);
+        Log.d(TAG, Receiver);
+        Log.d(TAG, Sender);
+        Log.d(TAG, Url);
+        Log.d(TAG, Status);
+        Log.d(TAG, Time);
         DataModel PrevData = getItem(TypeVal, CarrierVal, Number);
         mRealm.beginTransaction();
         PrevData.setReceiver(Receiver);
@@ -64,6 +72,7 @@ public class DataTool {
         PrevData.setStatusArray(Status);
         PrevData.setTimeArray(Time);
         mRealm.commitTransaction();
+        Log.d(TAG, "syncItem : Synced!");
     }
 
     public DataModel getItem(String TypeVal, String CarrierVal, String Number){
