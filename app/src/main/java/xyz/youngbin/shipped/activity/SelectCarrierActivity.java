@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import xyz.youngbin.shipped.R;
 
@@ -16,6 +17,7 @@ public class SelectCarrierActivity extends AppCompatActivity {
     Context mContext = SelectCarrierActivity.this;
     String mTypeVal;
     ListView mListView;
+    ProgressBar mProgressBar;
     String[] mCarrierArray;
     String[] mCarriersValArray;
     
@@ -25,6 +27,8 @@ public class SelectCarrierActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview_only);
 
+        mProgressBar = (ProgressBar)findViewById(R.id.progress);
+        mProgressBar.setVisibility(View.GONE);
         mListView = (ListView)findViewById(R.id.listView);
 
         mTypeVal = getIntent().getStringExtra("typeval");

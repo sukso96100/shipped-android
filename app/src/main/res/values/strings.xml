@@ -21,6 +21,7 @@
         <item>ECMS Express (APEX)</item>
         <item>UPS</item>
         <item>i-Parcel</item>
+        <item>USPS</item>
         <!--Korean Carriers-->
         <item>Korea Post Domestic Mails</item>
         <item>Korea Post International Mails</item>
@@ -32,6 +33,7 @@
         <item>ecms</item>
         <item>ups</item>
         <item>iparcel</item>
+        <item>usps</item>
         <!--Korean Carriers-->
         <item>koreapost_d</item>
         <item>koreapost_i</item>

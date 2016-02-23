@@ -104,7 +104,7 @@ public class ShippedServer{
 
                 @Override
                 public void onFailure(Call<ShippedNetData> call, Throwable t) {
-
+                    mCallback.onFinished();
                 }
             });
 

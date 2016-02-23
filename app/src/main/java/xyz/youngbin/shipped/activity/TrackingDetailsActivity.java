@@ -2,6 +2,7 @@ package xyz.youngbin.shipped.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import xyz.youngbin.shipped.R;
@@ -18,6 +20,7 @@ import xyz.youngbin.shipped.data.DataModel;
 import xyz.youngbin.shipped.data.DataTool;
 import xyz.youngbin.shipped.data.DetailsAdapter;
 import xyz.youngbin.shipped.data.Util;
+import xyz.youngbin.shipped.net.OpenInWebBrowser;
 import xyz.youngbin.shipped.net.ShippedServer;
 
 public class TrackingDetailsActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
@@ -34,6 +37,7 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
     String[] mStatus;
     String[] mTime;
 
+    ProgressBar mProgressBar;
     SwipeRefreshLayout mSRL;
     ListView mListView;
     View mHeader;
@@ -45,6 +49,7 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview_only);
 
+        mProgressBar = (ProgressBar)findViewById(R.id.progress);
         mListView = (ListView)findViewById(R.id.listView);
         mSRL = (SwipeRefreshLayout)findViewById(R.id.root);
 
@@ -100,6 +105,12 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
                 editIntent.putExtra("num", mNum);
                 editIntent.putExtra("isprevdata", true);
                 startActivityForResult(editIntent, 7);
+                break;
+            case R.id.action_web:
+                OpenInWebBrowser.execute(TrackingDetailsActivity.this, mData.getUrl());
+                break;
+            case R.id.action_share:
+                shareData();
                 break;
 
         }
@@ -166,6 +177,7 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
     }
 
     void updateData(){
+        mSRL.setRefreshing(true);
         Log.d(TAG, "Getting Data from server");
         ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum, new ShippedServer.ShippedServerCallback() {
             @Override
@@ -176,13 +188,26 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
                 Log.d(TAG, "Displaying Data from DB");
                 setupListView();
                 mSRL.setRefreshing(false);
+                mProgressBar.setVisibility(View.GONE);
             }
         });
     }
 
     @Override
     public void onRefresh() {
-        mSRL.setRefreshing(true);
         updateData();
+    }
+
+    void shareData(){
+        String toShare = "";
+        try{toShare += mData.getName() + "\n";}catch (Exception e){}
+        try{toShare += mData.getNumber() + "\n";}catch (Exception e){}
+        try{toShare += mCarrier + "\n";}catch (Exception e){}
+        try{toShare += mData.getUrl();}catch (Exception e){}
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, toShare);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 }
