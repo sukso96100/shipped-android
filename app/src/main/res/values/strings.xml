@@ -27,6 +27,8 @@
         <item>Korea Post International Mails</item>
         <item>Logen Corporation</item>
         <item>CJ Korea Express Domestic Mails</item>
+        <!--Chinese Carriers-->
+        <item>China Post</item>
     </string-array>
     <string-array name="carriers_mails_val">
         <!--US Carriers-->
@@ -39,6 +41,8 @@
         <item>koreapost_i</item>
         <item>logen</item>
         <item>korex_d</item>
+        <!--Chinese Carriers-->
+        <item>chinapost</item>
     </string-array>
 
     <string name="title_activity_add_new_item">Add or edit item</string>

@@ -25,6 +25,8 @@
         <item>우체국 국제우편</item>
         <item>로젠택배</item>
         <item>CJ 대한통운 국내우편</item>
+        <!--Chinese Carriers-->
+        <item>중국우정</item>
     </string-array>
     <string name="title_activity_add_new_item">항목 추가 또는 수정</string>
     <string name="no_item">(+) 를 눌러 항목을 추가하세요.</string>
