@@ -103,6 +103,9 @@
                 </LinearLayout>
             </LinearLayout>
             <include
+                android:id="@+id/adbanner"
+                layout="@layout/banner_admob"/>
+            <include
                 android:id="@+id/empty"
                 layout="@layout/emptyview"/>
         </LinearLayout>

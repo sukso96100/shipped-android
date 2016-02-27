@@ -53,7 +53,7 @@ public class DataTool {
         Log.d(TAG, "saveitem : saved");
     }
 
-    public void syncItem(String TypeVal, String CarrierVal, String Number,
+    public Boolean syncItem(String TypeVal, String CarrierVal, String Number,
                          String Receiver, String Sender, String Url, String Status, String Time){
         Log.d(TAG, "syncItem");
         Log.d(TAG, TypeVal);
@@ -65,6 +65,17 @@ public class DataTool {
         Log.d(TAG, Status);
         Log.d(TAG, Time);
         DataModel PrevData = getItem(TypeVal, CarrierVal, Number);
+        Boolean hasStatusChanges;
+        // Check Status has changes
+        if(!Status.equals(PrevData.getStatusArray())
+                &&!Time.equals(PrevData.getTimeArray())){
+            Log.d(TAG, "syncItem : This item has some status changes");
+            hasStatusChanges = true;
+        }else{
+            Log.d(TAG, "syncItem : This item has no status changes");
+            hasStatusChanges = false;
+        }
+
         mRealm.beginTransaction();
         PrevData.setReceiver(Receiver);
         PrevData.setSender(Sender);
@@ -73,6 +84,7 @@ public class DataTool {
         PrevData.setTimeArray(Time);
         mRealm.commitTransaction();
         Log.d(TAG, "syncItem : Synced!");
+        return hasStatusChanges;
     }
 
     public DataModel getItem(String TypeVal, String CarrierVal, String Number){

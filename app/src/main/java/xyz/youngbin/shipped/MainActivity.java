@@ -23,6 +23,8 @@ import xyz.youngbin.shipped.data.DataModel;
 import xyz.youngbin.shipped.data.DataTool;
 import xyz.youngbin.shipped.data.MainItemAdapter;
 import xyz.youngbin.shipped.data.Util;
+import xyz.youngbin.shipped.profit.AdMobUtil;
+import xyz.youngbin.shipped.activity.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
 implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener {
@@ -36,11 +38,14 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     ArrayList<String> mSelection;
     MainItemAdapter mAdapter;
 
+    View mAdBanner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAdBanner = AdMobUtil.getAdMobBanner(mContext);
         mListView = (ListView)findViewById(R.id.listView);
         mEmptyView = findViewById(R.id.empty);
         mInfo = (TextView)findViewById(R.id.info);
@@ -84,6 +89,7 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(mContext, SettingsActivity.class));
             return true;
         }
 
@@ -91,20 +97,24 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     }
 
     public void setupListView(){
-            mData = mDataTool.getAllItems();
-            mSelection = new ArrayList<>();
-            mAdapter = new MainItemAdapter(mContext, mData, true, mSelection);
-            mListView.setAdapter(mAdapter);
-            mListView.setEmptyView(mEmptyView);
-            mListView.setOnItemClickListener(this);
-            mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
-            mListView.setMultiChoiceModeListener(this);
+
+        try{mListView.removeHeaderView(mAdBanner);}catch (Exception e){}
+        mData = mDataTool.getAllItems();
+        mSelection = new ArrayList<>();
+        mAdapter = new MainItemAdapter(mContext, mData, true, mSelection);
+        mListView.setAdapter(mAdapter);
+        mListView.setEmptyView(mEmptyView);
+        mListView.setOnItemClickListener(this);
+        mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
+        mListView.setMultiChoiceModeListener(this);
+        mListView.addHeaderView(mAdBanner);
 
     }
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+        int position = pos - 1;
         Intent detailsIntent = new Intent(mContext, TrackingDetailsActivity.class);
         detailsIntent.putExtra("typeval", mData.get(position).getTypeVal());
         detailsIntent.putExtra("carrier", Util.carrierValtoCarrierString(mContext,
@@ -115,7 +125,8 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     }
 
     @Override
-    public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
+    public void onItemCheckedStateChanged(android.view.ActionMode mode, int pos, long id, boolean checked) {
+        int position = pos - 1;
         if(checked){
             mSelection.add(String.valueOf(position));
         }else {

@@ -55,10 +55,11 @@ public class ShippedServer{
     }
 
     public interface ShippedServerCallback{
-        public void onFinished();
+        public void onFinished(Boolean hasStatusChanges);
     }
 
-    public static void updateItem(Context mContext, final String Type, final String Carrier, final String Number, final ShippedServerCallback mCallback){
+    public static void updateItem(Context mContext, final String Type, final String Carrier,
+                                  final String Number, final ShippedServerCallback mCallback){
 
         final String TAG = "updateItem";
         final DataTool mDataTool = new DataTool(mContext);
@@ -98,13 +99,14 @@ public class ShippedServer{
                     String Url = NetData.url;
                     String Status = Util.JsonArrayProcesser(NetData.status, "location");
                     String Time = Util.JsonArrayProcesser(NetData.status, "time");
-                    mDataTool.syncItem(Type, Carrier, Number, Receiver, Sender, Url, Status, Time);
-                    mCallback.onFinished();
+                    Boolean hasStatusChanges =
+                            mDataTool.syncItem(Type, Carrier, Number, Receiver, Sender, Url, Status, Time);
+                    mCallback.onFinished(hasStatusChanges);
                 }
 
                 @Override
                 public void onFailure(Call<ShippedNetData> call, Throwable t) {
-                    mCallback.onFinished();
+                    mCallback.onFinished(false);
                 }
             });
 

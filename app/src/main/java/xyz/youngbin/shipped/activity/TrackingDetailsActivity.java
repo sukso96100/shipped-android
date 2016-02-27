@@ -22,8 +22,10 @@ import xyz.youngbin.shipped.data.DetailsAdapter;
 import xyz.youngbin.shipped.data.Util;
 import xyz.youngbin.shipped.net.OpenInWebBrowser;
 import xyz.youngbin.shipped.net.ShippedServer;
+import xyz.youngbin.shipped.profit.AdMobUtil;
 
-public class TrackingDetailsActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class TrackingDetailsActivity extends AppCompatActivity
+        implements SwipeRefreshLayout.OnRefreshListener{
 
     Context mContext = TrackingDetailsActivity.this;
     DataModel mData;
@@ -41,6 +43,7 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
     SwipeRefreshLayout mSRL;
     ListView mListView;
     View mHeader;
+    View mAdBanner;
 
     String TAG = mContext.getClass().getSimpleName();
 
@@ -136,6 +139,7 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
         mListView.setAdapter(adapter);
 
 
+        //Setup Header
         switch (mTypeVal){
             case "mail":
                 mHeader = mLayoutInflaer.inflate(R.layout.header_mails, null);
@@ -173,15 +177,22 @@ public class TrackingDetailsActivity extends AppCompatActivity implements SwipeR
         }else{
             mHeader.findViewById(R.id.empty).setVisibility(View.GONE);
         }
+
+        //Setup AdMob Banner
+        if(mHeader!=null){
+            mAdBanner = mHeader.findViewById(R.id.adbanner);
+            AdMobUtil.loadAdInto(mAdBanner, mContext);
+        }
         mListView.addHeaderView(mHeader);
     }
 
     void updateData(){
         mSRL.setRefreshing(true);
         Log.d(TAG, "Getting Data from server");
-        ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum, new ShippedServer.ShippedServerCallback() {
+        ShippedServer.updateItem(mContext, mTypeVal, mCarrierVal, mNum,
+                new ShippedServer.ShippedServerCallback() {
             @Override
-            public void onFinished() {
+            public void onFinished(Boolean hasStatusChanges) {
                 Log.d(TAG, "Getting Data from DB");
                 mData = mDataTool.getItem(mTypeVal, mCarrierVal, mNum);
 

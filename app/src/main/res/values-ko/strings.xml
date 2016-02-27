@@ -44,5 +44,20 @@
     <string name="delete">제거</string>
     <string name="i18n_ups">ko_kr</string>
     <string name="i18n_ecms">ko</string>
+    <string name="title_activity_settings"></string>
+
+    <string name="pref_auto_update_frequency">추적정보 자동 업데이트 빈도</string>
+    <string-array name="entry_auto_update_frequency">
+        <item>10 분</item>
+        <item>30 분</item>
+        <item>1 시간</item>
+        <item>2 시간</item>
+        <item>4 시간</item>
+        <item>8 시간</item>
+        <item>12 시간</item>
+        <item>24 시간</item>
+        <item>자동 업데이트 없음</item>
+    </string-array>
+    <string name="pref_sunscribe">광고 제거 라이선스 구독하기</string>
 
 </resources>
