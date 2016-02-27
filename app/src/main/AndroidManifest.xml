@@ -49,7 +49,7 @@
             android:label="@string/title_activity_select_carrier"></activity>
         <activity
             android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings"
+            android:label="@string/action_settings"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
