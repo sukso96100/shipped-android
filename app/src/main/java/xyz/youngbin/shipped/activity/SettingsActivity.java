@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings);
-
+            getPreferenceScreen().setOnPreferenceChangeListener(this);
 
         }
 
