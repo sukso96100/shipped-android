@@ -3,6 +3,7 @@
     package="xyz.youngbin.shipped">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -46,7 +47,7 @@
         </activity>
         <activity
             android:name=".activity.SelectCarrierActivity"
-            android:label="@string/title_activity_select_carrier"></activity>
+            android:label="@string/title_activity_select_carrier" />
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/action_settings"

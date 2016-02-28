@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import xyz.youngbin.shipped.R;
 import xyz.youngbin.shipped.alarm.UpdateAlarmManager;
