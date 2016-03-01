@@ -13,6 +13,11 @@
         android:positiveButtonText="@null"
         android:title="@string/pref_auto_update_frequency" />
 
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="update_notification"
+        android:title="@string/pref_notify"/>
+
 
 
 </PreferenceScreen>

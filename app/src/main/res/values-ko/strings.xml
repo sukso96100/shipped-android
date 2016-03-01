@@ -59,5 +59,6 @@
         <item>자동 업데이트 없음</item>
     </string-array>
     <string name="pref_sunscribe">광고 제거 라이선스 구독하기</string>
+    <string name="pref_notify">추적 정보 업데이트 알림 받기</string>
 
 </resources>
