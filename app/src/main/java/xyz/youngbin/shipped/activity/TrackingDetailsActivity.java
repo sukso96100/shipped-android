@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -186,6 +187,27 @@ public class TrackingDetailsActivity extends AppCompatActivity
             AdMobUtil.loadAdInto(mAdBanner, mContext);
         }
         mListView.addHeaderView(mHeader);
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                boolean enable = false;
+                if(mListView != null && mListView.getChildCount() > 0){
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = mListView.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = mListView.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+                mSRL.setEnabled(enable);
+            }
+        });
     }
 
     void updateData(){
