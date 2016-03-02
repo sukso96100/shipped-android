@@ -103,5 +103,6 @@
         tortor.
     </string>
     <string name="pref_notify">Notify tracking information updates</string>
+    <string name="noti_update">Tracking information has been updated.</string>
 
 </resources>

@@ -60,5 +60,6 @@
     </string-array>
     <string name="pref_sunscribe">광고 제거 라이선스 구독하기</string>
     <string name="pref_notify">추적 정보 업데이트 알림 받기</string>
+    <string name="noti_update">추적 정보가 업데이트되었습니다.</string>
 
 </resources>

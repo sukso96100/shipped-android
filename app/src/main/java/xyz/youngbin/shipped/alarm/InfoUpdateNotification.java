@@ -14,6 +14,10 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import xyz.youngbin.shipped.R;
+import xyz.youngbin.shipped.activity.TrackingDetailsActivity;
+import xyz.youngbin.shipped.data.DataModel;
+import xyz.youngbin.shipped.data.DataTool;
+import xyz.youngbin.shipped.data.Util;
 
 /**
  * Helper class for showing and canceling info update
@@ -43,20 +47,26 @@ public class InfoUpdateNotification {
      *
      * @see #cancel(Context)
      */
-    public static void notify(final Context context,
-                              final String exampleString, final int number) {
+    public static void notify(final Context context, final String itemTypeVal, final String itemCarrierVal, final String itemNumber) {
         final Resources res = context.getResources();
 
         // This image is used as the notification's large icon (thumbnail).
         // TODO: Remove this if your notification has no relevant thumbnail.
         final Bitmap picture = BitmapFactory.decodeResource(res, R.drawable.example_picture);
 
+        final DataTool mDataTool = new DataTool(context);
+        final DataModel mDataModel = mDataTool.getItem(itemTypeVal, itemCarrierVal, itemNumber);
 
-        final String ticker = exampleString;
-        final String title = res.getString(
-                R.string.info_update_notification_title_template, exampleString);
-        final String text = res.getString(
-                R.string.info_update_notification_placeholder_text_template, exampleString);
+        final String ticker = mDataModel.getName();
+        final String title = mDataModel.getName();
+        final String text = res.getString(R.string.noti_update);
+
+        Intent intent = new Intent(context, TrackingDetailsActivity.class);
+        intent.putExtra("typecal", mDataModel.getTypeVal());
+        intent.putExtra("carrier", Util.carrierValtoCarrierString(
+                context, mDataModel.getTypeVal(), mDataModel.getCarrierVal()));
+        intent.putExtra("carriercal", mDataModel.getCarrierVal());
+        intent.putExtra("num", mDataModel.getNumber());
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 
@@ -83,9 +93,6 @@ public class InfoUpdateNotification {
                 // Set ticker text (preview) information for this notification.
                 .setTicker(ticker)
 
-                // Show a number. This is useful when stacking notifications of
-                // a single type.
-                .setNumber(number)
 
                 // If this notification relates to a past or upcoming event, you
                 // should set the relevant time information using the setWhen
@@ -96,13 +103,12 @@ public class InfoUpdateNotification {
                 // the notification timestamp in milliseconds.
                 //.setWhen(...)
 
+
+
                 // Set the pending intent to be initiated when the user touches
                 // the notification.
                 .setContentIntent(
-                        PendingIntent.getActivity(
-                                context,
-                                0,
-                                new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")),
+                        PendingIntent.getActivity(context, 0, intent,
                                 PendingIntent.FLAG_UPDATE_CURRENT))
 
                 // Automatically dismiss the notification when it is touched.
