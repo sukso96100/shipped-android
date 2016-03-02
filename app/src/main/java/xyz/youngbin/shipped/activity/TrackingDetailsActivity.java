@@ -110,10 +110,12 @@ public class TrackingDetailsActivity extends AppCompatActivity
                 startActivityForResult(editIntent, 7);
                 break;
             case R.id.action_web:
-                OpenInWebBrowser.execute(TrackingDetailsActivity.this, mData.getUrl());
+                if(mData.getUrl()!=null) {
+                    OpenInWebBrowser.execute(TrackingDetailsActivity.this, mData.getUrl());
+                }
                 break;
             case R.id.action_share:
-                shareData();
+                if(mData.getUrl()!=null) {shareData();}
                 break;
 
         }

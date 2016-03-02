@@ -45,7 +45,7 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        mAdBanner = AdMobUtil.getAdMobBanner(mContext);
         mListView = (ListView)findViewById(R.id.listView);
         mEmptyView = findViewById(R.id.empty);
         mInfo = (TextView)findViewById(R.id.info);
@@ -98,7 +98,7 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
 
     public void setupListView(){
 
-        mAdBanner = AdMobUtil.getAdMobBanner(mContext);
+
         try{mListView.removeHeaderView(mAdBanner);}catch (Exception e){}
         mData = mDataTool.getAllItems();
         mSelection = new ArrayList<>();
@@ -108,6 +108,7 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
         mListView.setOnItemClickListener(this);
         mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
         mListView.setMultiChoiceModeListener(this);
+        mAdBanner = AdMobUtil.getAdMobBanner(mContext);
         mListView.addHeaderView(mAdBanner);
 
     }

@@ -49,6 +49,7 @@ public class DataSyncService extends Service {
                         public void onFinished(Boolean hasStatusChanges) {
                             if(hasStatusChanges&&mSwitch){
                                 // Display Notification
+                                Log.d("DataSyncService","Showing Notification");
                                 InfoUpdateNotification.notify(mContext,
                                         item.getTypeVal(), item.getCarrierVal(), item.getNumber());
                             }
