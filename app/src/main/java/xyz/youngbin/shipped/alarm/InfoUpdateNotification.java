@@ -62,10 +62,10 @@ public class InfoUpdateNotification {
         final String text = res.getString(R.string.noti_update);
 
         Intent intent = new Intent(context, TrackingDetailsActivity.class);
-        intent.putExtra("typecal", mDataModel.getTypeVal());
+        intent.putExtra("typeval", mDataModel.getTypeVal());
         intent.putExtra("carrier", Util.carrierValtoCarrierString(
                 context, mDataModel.getTypeVal(), mDataModel.getCarrierVal()));
-        intent.putExtra("carriercal", mDataModel.getCarrierVal());
+        intent.putExtra("carrierval", mDataModel.getCarrierVal());
         intent.putExtra("num", mDataModel.getNumber());
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
