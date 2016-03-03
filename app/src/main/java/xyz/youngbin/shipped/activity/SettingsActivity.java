@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import xyz.youngbin.shipped.R;
 import xyz.youngbin.shipped.alarm.UpdateAlarmManager;
+import xyz.youngbin.shipped.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -20,26 +21,6 @@ public class SettingsActivity extends AppCompatActivity {
         PreferenceFragment mFragment = new SettingsFragment();
         getFragmentManager().beginTransaction()
                 .add(R.id.container, mFragment).commit();
-    }
-
-    public static class SettingsFragment extends PreferenceFragment{
-
-
-        @Override
-        public void onCreate(Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.settings);
-            getPreferenceManager().findPreference("update_frequency")
-                    .setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    UpdateAlarmManager.setupAlarm(getActivity());
-                    return true;
-                }
-            });
-
-        }
-
     }
 
 

@@ -104,5 +104,9 @@
     </string>
     <string name="pref_notify">Notify tracking information updates</string>
     <string name="noti_update">Tracking information has been updated.</string>
+    <string name="prefgroup_settings">App settings</string>
+    <string name="prefgroup_about">About</string>
+    <string name="app_ver">App version</string>
+    <string name="visit_web">Visit youngbin.xyz</string>
 
 </resources>

@@ -32,21 +32,6 @@ public class InfoUpdateNotification {
      */
     private static final String NOTIFICATION_TAG = "InfoUpdate";
 
-    /**
-     * Shows the notification, or updates a previously shown notification of
-     * this type, with the given parameters.
-     * <p>
-     * TODO: Customize this method's arguments to present relevant content in
-     * the notification.
-     * <p>
-     * TODO: Customize the contents of this method to tweak the behavior and
-     * presentation of info update notifications. Make
-     * sure to follow the
-     * <a href="https://developer.android.com/design/patterns/notifications.html">
-     * Notification design guidelines</a> when doing so.
-     *
-     * @see #cancel(Context)
-     */
     public static void notify(final Context context, final String itemTypeVal, final String itemCarrierVal, final String itemNumber) {
         final Resources res = context.getResources();
 
@@ -85,10 +70,6 @@ public class InfoUpdateNotification {
                 // Use a default priority (recognized on devices running Android
                 // 4.1 or later)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-                // Provide a large icon, shown with the notification in the
-                // notification drawer on devices running Android 3.0 or later.
-                .setLargeIcon(picture)
 
                 // Set ticker text (preview) information for this notification.
                 .setTicker(ticker)
