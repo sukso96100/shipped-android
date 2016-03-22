@@ -25,6 +25,7 @@
         <item>우체국 국제우편</item>
         <item>로젠택배</item>
         <item>CJ 대한통운 국내우편</item>
+        <item>CJ 대한통운 국제우편</item>
         <!--Chinese Carriers-->
         <item>중국우정</item>
     </string-array>
@@ -44,7 +45,6 @@
     <string name="delete">제거</string>
     <string name="i18n_ups">ko_kr</string>
     <string name="i18n_ecms">ko</string>
-    <string name="title_activity_settings"></string>
 
     <string name="pref_auto_update_frequency">추적정보 자동 업데이트 빈도</string>
     <string-array name="entry_auto_update_frequency">

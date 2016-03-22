@@ -14,7 +14,7 @@
     <string-array name="type">
         <item>Mail</item>
     </string-array>
-    <string-array name="type_val">
+    <string-array name="type_val" translatable="false">
         <item>mail</item>
     </string-array>
 
@@ -30,10 +30,11 @@
         <item>Korea Post International Mails</item>
         <item>Logen Corporation</item>
         <item>CJ Korea Express Domestic Mails</item>
+        <item>CJ Korea Express International Mails</item>
         <!--Chinese Carriers-->
         <item>China Post</item>
     </string-array>
-    <string-array name="carriers_mails_val">
+    <string-array name="carriers_mails_val" translatable="false">
         <!--US Carriers-->
         <item>ecms</item>
         <item>ups</item>
@@ -44,6 +45,7 @@
         <item>koreapost_i</item>
         <item>logen</item>
         <item>korex_d</item>
+        <item>korex_i</item>
         <!--Chinese Carriers-->
         <item>chinapost</item>
     </string-array>
@@ -78,7 +80,7 @@
         <item>24 hours</item>
         <item>No auto updates</item>
     </string-array>
-    <string-array name="entry_val_auto_update_frequency">
+    <string-array name="entry_val_auto_update_frequency" translatable="false">
         <item>10</item>
         <item>30</item>
         <item>60</item>
@@ -91,17 +93,6 @@
     </string-array>
     <string name="pref_sunscribe">Subscribe to Ad removal license</string>
 
-    <string name="info_update_notification_title_template" translatable="false">Info update: %1$s</string>
-
-    <!-- TODO: remove this placeholder text -->
-    <string name="info_update_notification_placeholder_text_template" translatable="false">You said %1$s and lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
-        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
-        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
-        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
-        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
-        tortor.
-    </string>
     <string name="pref_notify">Notify tracking information updates</string>
     <string name="noti_update">Tracking information has been updated.</string>
     <string name="prefgroup_settings">App settings</string>

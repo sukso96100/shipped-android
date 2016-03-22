@@ -44,7 +44,8 @@
 
         <activity
             android:name=".activity.TrackingDetailsActivity"
-            android:label="@string/title_activity_tracking_details">
+            android:label="@string/title_activity_tracking_details"
+            android:theme="@style/AppTheme.NoToolBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="xyz.youngbin.shipped.MainActivity" />
