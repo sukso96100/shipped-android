@@ -61,6 +61,10 @@ public class Util {
                 mCarrierVal = mContext.getResources().getStringArray(R.array.carriers_mails_val);
                 mCarrier = mContext.getResources().getStringArray(R.array.carriers_mails);
                 break;
+            case "aircargo":
+                mCarrierVal = mContext.getResources().getStringArray(R.array.carriers_aircargo_val);
+                mCarrier = mContext.getResources().getStringArray(R.array.carriers_aircargo);
+                break;
         }
 
         int index = 0;

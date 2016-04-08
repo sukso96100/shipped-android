@@ -151,33 +151,38 @@ public class TrackingDetailsActivity extends AppCompatActivity
         switch (mTypeVal){
             case "mail":
                 mHeader = mLayoutInflaer.inflate(R.layout.header_mails, null);
-                TextView txtName = (TextView)mHeader.findViewById(R.id.name);
-                TextView txtCarrier = (TextView)mHeader.findViewById(R.id.carrier);
-                TextView txtNum = (TextView)mHeader.findViewById(R.id.num);
-                TextView txtSender = (TextView)mHeader.findViewById(R.id.sender);
-                TextView txtReceiver = (TextView)mHeader.findViewById(R.id.receiver);
-
-                try{
-                    txtName.setText(mData.getName());
-                }catch (Exception e){
-                    e.printStackTrace();
-                    txtName.setText(mNum);
-                }
-                txtCarrier.setText(mCarrier);
-                txtNum.setText(mNum);
-                if(mData.getSender()==null||mData.getSender().equals("")){
-                    txtSender.setText(" : "+mContext.getResources().getString(R.string.unknown));
-                    }else{
-                    txtSender.setText(" : "+mData.getSender());
-                    }
-                if(mData.getReceiver()==null||mData.getReceiver().equals("")){
-                    txtReceiver.setText(" : "+mContext.getResources().getString(R.string.unknown));
-                    }else{
-                    txtReceiver.setText(" : "+mData.getReceiver());
-                    }
-
+                break;
+            case "aircargo":
+                mHeader = mLayoutInflaer.inflate(R.layout.header_aircargo, null);
                 break;
         }
+
+        TextView txtName = (TextView)mHeader.findViewById(R.id.name);
+        TextView txtCarrier = (TextView)mHeader.findViewById(R.id.carrier);
+        TextView txtNum = (TextView)mHeader.findViewById(R.id.num);
+        TextView txtSender = (TextView)mHeader.findViewById(R.id.sender);
+        TextView txtReceiver = (TextView)mHeader.findViewById(R.id.receiver);
+
+        try{
+            txtName.setText(mData.getName());
+        }catch (Exception e){
+            e.printStackTrace();
+            txtName.setText(mNum);
+        }
+        txtCarrier.setText(mCarrier);
+        txtNum.setText(mNum);
+        if(mData.getSender()==null||mData.getSender().equals("")){
+            txtSender.setText(mContext.getResources().getString(R.string.unknown));
+        }else{
+            txtSender.setText(mData.getSender());
+        }
+        if(mData.getReceiver()==null||mData.getReceiver().equals("")){
+            txtReceiver.setText(mContext.getResources().getString(R.string.unknown));
+        }else{
+            txtReceiver.setText(mData.getReceiver());
+        }
+
+
         if(mStatus.length==0){
             Log.d(TAG, "Adding EmptyView");
             TextView mInfo = (TextView)mHeader.findViewById(R.id.info);

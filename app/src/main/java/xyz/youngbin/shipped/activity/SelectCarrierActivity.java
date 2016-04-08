@@ -40,6 +40,9 @@ public class SelectCarrierActivity extends AppCompatActivity {
             case "mail":
                 setUpListView(R.array.carriers_mails, R.array.carriers_mails_val);
                 break;
+            case "aircargo":
+                setUpListView(R.array.carriers_aircargo, R.array.carriers_aircargo_val);
+                break;
         }
     }
 

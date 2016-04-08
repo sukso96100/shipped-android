@@ -82,6 +82,9 @@ public class ShippedServer{
             case "ups":
                 I18n = mContext.getResources().getString(R.string.i18n_ups);
                 break;
+            case "asiana":
+                I18n = mContext.getResources().getString(R.string.i18n_asiana);
+                break;
         }
 
         // Get Data from the server

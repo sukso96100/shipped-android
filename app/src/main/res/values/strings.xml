@@ -13,9 +13,11 @@
     <!--Item Type-->
     <string-array name="type">
         <item>Mail</item>
+        <item>Air Cargo</item>
     </string-array>
     <string-array name="type_val" translatable="false">
         <item>mail</item>
+        <item>aircargo</item>
     </string-array>
 
     <!--Carriers - Mails-->
@@ -52,22 +54,37 @@
         <item>chinapost</item>
     </string-array>
 
+    <!--Carriers - Air Cargo-->
+    <string-array name="carriers_aircargo">
+        <item>Asiana Cargo</item>
+    </string-array>
+
+    <string-array name="carriers_aircargo_val">
+        <item>asiana</item>
+    </string-array>
+
+    <!--Type-->
+    <string name="mail">Mail</string>
+    <string name="aircargo">Air Cargo</string>
+
     <string name="title_activity_add_new_item">Add or edit item</string>
     <string name="no_item">Touch (+) to add new item.</string>
     <string name="title_activity_select_carrier">Select Carrier</string>
     <string name="btn_click_to_select">(Click here to select)</string>
-    <string name="sender">Sender</string>
-    <string name="receiver">Receiver</string>
+    <string name="sender">(Sender)</string>
+    <string name="receiver">(Receiver)</string>
     <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string name="open_web">Open in web browser</string>
     <string name="no_status">Status is not available yet.</string>
-    <string name="mail">Mail</string>
     <string name="unknown">(unknown)</string>
     <string name="no_info">No informations available.</string>
     <string name="delete">Delete</string>
+
+    <!--i18n-->
     <string name="i18n_ups">en_us</string>
     <string name="i18n_ecms">en</string>
+    <string name="i18n_asiana">En</string>
 
 
     <string name="pref_auto_update_frequency">Auto update frequency of tracking informations</string>

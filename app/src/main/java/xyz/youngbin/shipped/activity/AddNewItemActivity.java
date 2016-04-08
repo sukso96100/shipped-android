@@ -53,6 +53,7 @@ public class AddNewItemActivity extends AppCompatActivity {
         mBtnCarrier = (Button)findViewById(R.id.btn_carrier);
         mEtNum = (EditText)findViewById(R.id.et_num);
 
+        //If user is editing existing data, show previous data on widgets.
         mIsPrevData = getIntent().getBooleanExtra("isprevdata", false);
         mDataTool = new DataTool(mContext);
         if(mIsPrevData){
@@ -74,6 +75,9 @@ public class AddNewItemActivity extends AppCompatActivity {
                     break;
                 case "mail":
                     mSpType.setSelection(0);
+                    break;
+                case "aircargo":
+                    mSpType.setSelection(1);
                     break;
             }
         }
