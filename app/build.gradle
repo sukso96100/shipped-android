@@ -18,8 +18,8 @@ android {
         applicationId "xyz.youngbin.shipped"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 5
-        versionName "B5"
+        versionCode 6
+        versionName "B6"
         multiDexEnabled true
     }
     buildTypes {

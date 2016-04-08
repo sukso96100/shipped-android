@@ -59,7 +59,7 @@
         <item>Asiana Cargo</item>
     </string-array>
 
-    <string-array name="carriers_aircargo_val">
+    <string-array name="carriers_aircargo_val" translatable="false">
         <item>asiana</item>
     </string-array>
 
