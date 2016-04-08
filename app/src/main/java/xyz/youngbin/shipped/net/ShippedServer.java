@@ -26,7 +26,7 @@ import xyz.youngbin.shipped.data.Util;
  */
 public class ShippedServer{
 
-    private static String baseurl = "http://shipped.c.youngbin.xyz";
+    private static String baseurl = "https://shipped.c.youngbin.xyz";
 
     public static class ShippedNetData{
         public final String postid;

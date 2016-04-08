@@ -26,6 +26,7 @@
         <item>로젠택배</item>
         <item>CJ 대한통운 국내우편</item>
         <item>CJ 대한통운 국제우편</item>
+        <item>현대택배</item>
         <!--Chinese Carriers-->
         <item>중국우정</item>
     </string-array>

@@ -31,6 +31,7 @@
         <item>Logen Corporation</item>
         <item>CJ Korea Express Domestic Mails</item>
         <item>CJ Korea Express International Mails</item>
+        <item>Hyundai Logistics</item>
         <!--Chinese Carriers-->
         <item>China Post</item>
     </string-array>
@@ -46,6 +47,7 @@
         <item>logen</item>
         <item>korex_d</item>
         <item>korex_i</item>
+        <item>hyundai</item>
         <!--Chinese Carriers-->
         <item>chinapost</item>
     </string-array>
