@@ -57,10 +57,12 @@
     <!--Carriers - Air Cargo-->
     <string-array name="carriers_aircargo">
         <item>Asiana Cargo</item>
+        <item>Korean Air Cargo</item>
     </string-array>
 
     <string-array name="carriers_aircargo_val" translatable="false">
         <item>asiana</item>
+        <item>koreanair</item>
     </string-array>
 
     <!--Type-->
@@ -85,6 +87,7 @@
     <string name="i18n_ups">en_us</string>
     <string name="i18n_ecms">en</string>
     <string name="i18n_asiana">En</string>
+    <string name="i18n_koreanair">eng</string>
 
 
     <string name="pref_auto_update_frequency">Auto update frequency of tracking informations</string>
