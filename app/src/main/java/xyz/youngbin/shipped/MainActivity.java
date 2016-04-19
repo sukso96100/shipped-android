@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import io.realm.RealmResults;
 import xyz.youngbin.shipped.activity.AddNewItemActivity;
 import xyz.youngbin.shipped.activity.TrackingDetailsActivity;
+import xyz.youngbin.shipped.data.Clipboard;
 import xyz.youngbin.shipped.data.DataModel;
 import xyz.youngbin.shipped.data.DataTool;
 import xyz.youngbin.shipped.data.MainItemAdapter;
@@ -32,6 +34,7 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
     ListView mListView;
     View mEmptyView;
     TextView mInfo;
+    Snackbar mSnackbar;
     DataTool mDataTool;
     RealmResults<DataModel> mData;
 
@@ -45,10 +48,16 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Get Tracking Number from clipboard
+        final String Clip = Clipboard.getFromClipboard(mContext);
+        String Msg = String.format(mContext.getResources().getString(R.string.track_msg), Clip);
+
+        //Setup Views
         mAdBanner = AdMobUtil.getAdMobBanner(mContext);
         mListView = (ListView)findViewById(R.id.listView);
         mEmptyView = findViewById(R.id.empty);
         mInfo = (TextView)findViewById(R.id.info);
+        mSnackbar = Snackbar.make(findViewById(R.id.root),Msg, Snackbar.LENGTH_LONG);
 
         mInfo.setText(mContext.getResources().getString(R.string.no_item));
 
@@ -64,6 +73,22 @@ implements AdapterView.OnItemClickListener, AbsListView.MultiChoiceModeListener 
 
         setupListView();
 
+        //Show Snackbar When Clip is not null
+        if(Clip!=null){
+            mSnackbar.setAction(
+                    mContext.getResources().getString(R.string.track_btn),
+                    new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Open AddNewItemActivity
+                    Intent intent = new Intent(mContext, AddNewItemActivity.class);
+                    intent.putExtra("fromclip",true);
+                    intent.putExtra("num", Clip);
+                    startActivity(intent);
+                }
+            });
+            mSnackbar.show();
+        }
     }
 
     @Override

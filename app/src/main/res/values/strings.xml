@@ -121,5 +121,7 @@
     <string name="prefgroup_about">About</string>
     <string name="app_ver">App version</string>
     <string name="visit_web">Visit youngbin.xyz</string>
+    <string name="track_msg">Do you want to track %s ?</string>
+    <string name="track_btn">Track</string>
 
 </resources>

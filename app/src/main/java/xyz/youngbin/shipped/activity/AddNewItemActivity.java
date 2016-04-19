@@ -36,8 +36,6 @@ public class AddNewItemActivity extends AppCompatActivity {
 
     DataTool mDataTool;
     DataModel mPrevData;
-    Boolean mIsPrevData;
-
     String TAG = mContext.getClass().getSimpleName();
 
     @Override
@@ -54,9 +52,8 @@ public class AddNewItemActivity extends AppCompatActivity {
         mEtNum = (EditText)findViewById(R.id.et_num);
 
         //If user is editing existing data, show previous data on widgets.
-        mIsPrevData = getIntent().getBooleanExtra("isprevdata", false);
         mDataTool = new DataTool(mContext);
-        if(mIsPrevData){
+        if(getIntent().getBooleanExtra("isprevdata", false)){
             Log.d(TAG, "Loading Previous Data to Edit");
             mName = getIntent().getStringExtra("name");
             mTypeVal = getIntent().getStringExtra("typeval");
@@ -80,6 +77,9 @@ public class AddNewItemActivity extends AppCompatActivity {
                     mSpType.setSelection(1);
                     break;
             }
+        }else if (getIntent().getBooleanExtra("fromclip", false)){
+            //If User was navigated from snackbar
+            mEtNum.setText(getIntent().getStringExtra("num"));
         }
 
         mBtnCarrier.setOnClickListener(new View.OnClickListener() {

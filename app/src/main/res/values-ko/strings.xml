@@ -80,5 +80,7 @@
     <string name="prefgroup_about">앱 정보</string>
     <string name="app_ver">앱 버전</string>
     <string name="visit_web">youngbin.xyz 방문하기</string>
+    <string name="track_msg">%s 을(를) 추적 하시겠습니까?</string>
+    <string name="track_btn">추적</string>
 
 </resources>
